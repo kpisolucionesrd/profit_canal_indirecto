@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,Alert,AsyncStorage,Picker} from 'react-native';
 import Logo from '../../imagenes/logo_profit.png';
 import RadioBottom from './ElementosCompactos/radioBottom.js';
+import TextInputComponent from './ElementosCompactos/textInput.js';
 import {Icon,Button} from 'react-native-elements';
 
 export default class Encuesta extends Component{
   constructor(props){
     super(props);
-
+    this.setState({
+      default:"**Seleccionar**"
+    })
     //Funciones
     this.obtenerDatosEncuesta();
   };
@@ -182,24 +185,28 @@ export default class Encuesta extends Component{
         <Text style={iniciar_seccion_styles.secciones}>CAPACIDAD DEL COLMADO</Text>
         {this.state.camposForm.capacidadColmadoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
-        
+        <TextInputComponent identificador="Cantidad de Deliverys" funcion={this.crearJson} default={this.state.default}/>
 
-
-
-
-
-
+        {/*Tipo Ventana*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO VENTANA</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tipo Ventana</Text>
+        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {this.state.camposForm.tipoVentana.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        </Picker>
 
+        <TextInputComponent identificador="Cantidad Tramos Ventana" funcion={this.crearJson} default={this.state.default}/>
+
+        {/*Iniciativas de Visibilidad*/}
         <Text style={iniciar_seccion_styles.secciones}>INICIATIVAS DE VISIBILIDAD</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        {this.state.camposForm.iniciativasVisibilidad.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
+        {/*Surtido Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>SURTIDO COLMADO</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        {this.state.camposForm.surtidoColmado.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
+        {/*Actividad Competitiva*/}
         <Text style={iniciar_seccion_styles.secciones}>ACTIVIDAD COMPETITIVA</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        {this.state.camposForm.actividadCompetitiva.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
         <Text style={iniciar_seccion_styles.secciones}>COMENTARIOS GENERALES</Text>
         {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
