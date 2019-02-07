@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,Alert,AsyncStorage,Picker} from 'react-native';
 import Logo from '../../imagenes/logo_profit.png';
-import TextBoxInputCustom from '../ElementosCompactos/TextBoxCustom.js';
+import ComboBox from '../ElementosCompactos/TextBoxCustom.js';
 import {Icon,Button} from 'react-native-elements';
 
 export default class Encuesta extends Component{
@@ -13,7 +13,7 @@ export default class Encuesta extends Component{
   };
 
   static navigationOptions = {
-  title: 'Encuesta Mercaderista',
+    title: 'Encuesta Mercaderista',
   };
 
   //Eventos
@@ -147,9 +147,13 @@ export default class Encuesta extends Component{
           {this.state.colmados.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
+        {/*Estados de los Colmados*/}
         <Text style={iniciar_seccion_styles.secciones}>ESTADO DEL COLMADO</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {this.state.camposForm.estadoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        </Picker>
 
+        {/*Disosicion del Colmadero*/}
         <Text style={iniciar_seccion_styles.secciones}>DISPOSICION DEL COLMADERO</Text>
         {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 

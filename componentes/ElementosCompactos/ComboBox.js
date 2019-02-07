@@ -9,6 +9,7 @@ export default class ComboBox extends Component{
       seleccion:this.props.default,
     }
   }
+
   //Funciones
   cambioValor=(itemValue, itemIndex)=>{
     this.setState({
