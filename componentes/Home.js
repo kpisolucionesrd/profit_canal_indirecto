@@ -48,10 +48,10 @@ export default class Home extends Component{
           //Guardando los datos del mercaderista
           await AsyncStorage.setItem("datosUsuario",await JSON.stringify(responseJSON[0]));
 
-          //Descargando campos
-          camposFetch=await fetch("http://167.99.167.145/api/profit_agenda_trabajo/"+this.state.usuarioDigitado);
-          camposFetchJSON=await camposFetch.json();
-          await AsyncStorage.setItem("datosCampos",await JSON.stringify(camposFetchJSON[0]));
+          //Guardando los colmados del mercaderista
+          colmadosRequest=await fetch("http://167.99.167.145/api/profit_agenda_trabajo/"+this.state.usuarioDigitado);
+          colmadosRequestJSON=await colmadosRequestJSON.json();
+          await AsyncStorage.setItem("datosAgenda",await JSON.stringify(colmadosRequestJSON[0]))
 
           //Ir al menu de mercaderistas
           this.props.navigation.navigate("MenuMercaderista",{

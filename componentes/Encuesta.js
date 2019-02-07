@@ -4,11 +4,12 @@ import Logo from '../../imagenes/logo_profit.png';
 import TextBoxInputCustom from '../ElementosCompactos/TextBoxCustom.js';
 import {Icon,Button} from 'react-native-elements';
 
-//ME QUEDE EN LA PARTE DE RETREIVE LOS CAMPOS
-
 export default class Encuesta extends Component{
   constructor(props){
     super(props);
+
+    //Funciones
+    this.obtenerDatosEncuesta();
   };
 
   static navigationOptions = {
@@ -16,6 +17,21 @@ export default class Encuesta extends Component{
   };
 
   //Eventos
+  obtenerDatosEncuesta=async()=>{
+    /* Esta funcion se utiliza para obtener los campos descargados a la hora de realizar el loggin*/
+
+    //Aqui se configura los campos del formulario, colmados
+    try {
+      //Creacion de los states
+      this.setState({
+        campos:JSON.parse(await AsyncStorage.getItem("datosUsuario")).camposForm,
+        colmados:JSON.parse(await AsyncStorage.getItem("datosAgenda")).colmados,
+      })
+    } catch (e) {
+      alert("Error en funcion-obtenerDatosEncuesta---> "+e)
+    }
+  }
+
   crearJson=async(idCampo,nuevo_resultado)=>{
     //Proceso para crear el JSON con los datos de la encuesta
     const { navigation } = this.props;
@@ -125,41 +141,41 @@ export default class Encuesta extends Component{
     return(
       <ScrollView style={iniciar_seccion_styles.main}>
 
+        {/*Label Seleccionar Colmado*/}
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Favor Seleccionar Colmado</Text>
-
         <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {this.state.camposCallValue.map((campo)=><Picker.Item label={campo} value={campo} />)}
+          {this.state.colmados.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
-        <Text style={iniciar_seccion_styles.secciones}>CREMAS DENTALES</Text>
-        {this.state.cremasDetales80.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>ESTADO DEL COLMADO</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>HILO DENTAL</Text>
-        {this.state.hiloDental50.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>DISPOSICION DEL COLMADERO</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>SUAVIZANTES</Text>
-        {this.state.suavizantes65.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>TIPO DE ACCESO AL COLMADO</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>LAVAPLATOS LIQUIDOS</Text>
-        {this.state.lavaplatosLiquidos45.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>TAMAñO DEL COLMADO</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>CEPILLOS DENTALES</Text>
-        {this.state.cepillosDentales.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>CAPACIDAD DEL COLMADO</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>JABONES DE TOCADOR</Text>
-        {this.state.jabonesTocador50.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>TIPO VENTANA</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>ENJUAGUE BUCAL</Text>
-        {this.state.enjuagueBucal40.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>INICIATIVAS DE VISIBILIDAD</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>DESODORANTE</Text>
-        {this.state.desodorante30.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>SURTIDO COLMADO</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>LAVAPLATOS CREMA</Text>
-        {this.state.lavaplatosCrema50.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>ACTIVIDAD COMPETITIVA</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
-        <Text style={iniciar_seccion_styles.secciones}>DESINFECTANTES</Text>
-        {this.state.desinfectantes.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        <Text style={iniciar_seccion_styles.secciones}>COMENTARIOS GENERALES</Text>
+        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarMedidas}/>
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarMedidas}>Listo</Text>}
