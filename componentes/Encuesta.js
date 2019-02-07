@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,Alert,AsyncStorage,Picker} from 'react-native';
 import Logo from '../../imagenes/logo_profit.png';
-import ComboBox from '../ElementosCompactos/TextBoxCustom.js';
+import RadioBottom from './ElementosCompactos/radioBottom.js';
 import {Icon,Button} from 'react-native-elements';
 
 export default class Encuesta extends Component{
@@ -155,16 +155,39 @@ export default class Encuesta extends Component{
 
         {/*Disosicion del Colmadero*/}
         <Text style={iniciar_seccion_styles.secciones}>DISPOSICION DEL COLMADERO</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        {this.state.camposForm.dispColmaderoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
+        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Disposicion Colmadero</Text>
+        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {this.state.camposForm.dispColmadero.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        </Picker>
+
+        {/*Tipo de Acceso al Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO DE ACCESO AL COLMADO</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
+        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Acceso Colmado</Text>
+        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {this.state.camposForm.tipoAccesoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        </Picker>
+
+        {/*Tamaño del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TAMAñO DEL COLMADO</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
+        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tamaño del Colmado</Text>
+        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {this.state.camposForm.tamañoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        </Picker>
+
+        {/*Capacidad del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>CAPACIDAD DEL COLMADO</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        {this.state.camposForm.capacidadColmadoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
+
+        
+
+
+
+
+
 
         <Text style={iniciar_seccion_styles.secciones}>TIPO VENTANA</Text>
         {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
