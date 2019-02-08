@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,Alert,AsyncStorage,Picker} from 'react-native';
-import Logo from '../../imagenes/logo_profit.png';
 import RadioBottom from './ElementosCompactos/radioBottom.js';
 import TextInputComponent from './ElementosCompactos/textInput.js';
 import {Icon,Button} from 'react-native-elements';
