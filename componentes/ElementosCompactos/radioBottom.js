@@ -25,7 +25,7 @@ export default class RadioBottom extends Component{
           radio_props={this.state.valores}
           initial={-1}
           onPress={this.cambioValor}
-          buttonColor={{color:'white'}}
+          buttonColor={'white'}
         />
       </View>
     )
