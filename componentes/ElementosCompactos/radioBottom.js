@@ -26,6 +26,7 @@ export default class RadioBottom extends Component{
           initial={-1}
           onPress={this.cambioValor}
           buttonColor={'white'}
+          labelColor={'white'}
         />
       </View>
     )
