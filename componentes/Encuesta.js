@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,Alert,AsyncStorage,Picker} from 'react-native';
 import RadioBottom from './ElementosCompactos/radioBottom.js';
+import ComboBox from './ElementosCompactos/ComboBox.js';
 import TextInputComponent from './ElementosCompactos/textInput.js';
 import {Icon,Button} from 'react-native-elements';
 
