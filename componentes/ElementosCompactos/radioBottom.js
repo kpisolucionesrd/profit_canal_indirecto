@@ -25,6 +25,7 @@ export default class RadioBottom extends Component{
           radio_props={this.state.valores}
           initial={-1}
           onPress={this.cambioValor}
+          buttonStyle={{color:'white'}}
         />
       </View>
     )
@@ -33,7 +34,7 @@ export default class RadioBottom extends Component{
 
 const RadioBottomStyle=StyleSheet.create({
   text_subitem:{
-    color:'black',
+    color:'white',
     fontWeight:'bold',
     fontSize:15,
   }
