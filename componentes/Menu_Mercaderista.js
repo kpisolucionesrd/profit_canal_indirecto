@@ -14,15 +14,17 @@ export default class MenuMercaderista extends Component{
 
   //Eventos
   iniciarEncuesta=async()=>{
-    const { navigation } = this.props;
-    const datosUsuario=navigation.getParam('datosUsuario','some default value');
+    //Obteniendo campos y datos usuarios
+    datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario")); /*Aqui se encuentra los datos/campos*/
 
-    //Obteniendo campos
-    campos=JSON.parse(await AsyncStorage.getItem("datosCampos"));
+    //Obteniendo colmados
+    objetoDatosAgenda=JSON.parse(await AsyncStorage.getItem("datosAgenda"))
+    colmados=objetoDatosAgenda["colmados"]
 
     //Ir a la encuesta
     this.props.navigation.navigate('Encuesta',{
-      campos:campos
+      datosUsuarios:datosUsuarios,
+      colmados:colmados
     });
   };
 

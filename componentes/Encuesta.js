@@ -8,10 +8,10 @@ export default class Encuesta extends Component{
   constructor(props){
     super(props);
     this.setState({
-      default:"**Seleccionar**"
+      default:"**Seleccionar**",
+      disableButton:true
     })
     //Funciones
-    this.obtenerDatosEncuesta();
   };
 
   static navigationOptions = {
@@ -19,21 +19,6 @@ export default class Encuesta extends Component{
   };
 
   //Eventos
-  obtenerDatosEncuesta=async()=>{
-    /* Esta funcion se utiliza para obtener los campos descargados a la hora de realizar el loggin*/
-
-    //Aqui se configura los campos del formulario, colmados
-    try {
-      //Creacion de los states
-      this.setState({
-        campos:JSON.parse(await AsyncStorage.getItem("datosUsuario")).camposForm,
-        colmados:JSON.parse(await AsyncStorage.getItem("datosAgenda")).colmados,
-      })
-    } catch (e) {
-      alert("Error en funcion-obtenerDatosEncuesta---> "+e)
-    }
-  }
-
   crearJson=async(idCampo,nuevo_resultado)=>{
     //Proceso para crear el JSON con los datos de la encuesta
     const { navigation } = this.props;
@@ -84,8 +69,7 @@ export default class Encuesta extends Component{
       Object.keys(this.state.objetoDatosMedidas.enjuagueBucal40).length==this.state.enjuagueBucal40.length &
       Object.keys(this.state.objetoDatosMedidas.desodorante30).length==this.state.desodorante30.length &
       Object.keys(this.state.objetoDatosMedidas.lavaplatosCrema50).length==this.state.lavaplatosCrema50.length &
-      Object.keys(this.state.objetoDatosMedidas.desinfectantes).length==this.state.desinfectantes.length &
-      this.state.puntoVenta!="***SIN SELECCIONAR***"
+      Object.keys(this.state.objetoDatosMedidas.desinfectantes).length==this.state.desinfectantes.length
     ){
       //Desabilitar button
       this.setState({
@@ -140,75 +124,75 @@ export default class Encuesta extends Component{
 
   //Cadenas de Eventos
   render(){
+    const { navigation } = this.props;
+    const colmados=navigation.getParam('colmados','some default value');
+    const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
     return(
       <ScrollView style={iniciar_seccion_styles.main}>
 
         {/*Label Seleccionar Colmado*/}
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Favor Seleccionar Colmado</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {this.state.colmados.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {colmados.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
         {/*Estados de los Colmados*/}
         <Text style={iniciar_seccion_styles.secciones}>ESTADO DEL COLMADO</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {this.state.camposForm.estadoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {datosUsuarios.estadoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
         {/*Disosicion del Colmadero*/}
         <Text style={iniciar_seccion_styles.secciones}>DISPOSICION DEL COLMADERO</Text>
-        {this.state.camposForm.dispColmaderoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
+        {datosUsuarios.dispColmaderoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Disposicion Colmadero</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {this.state.camposForm.dispColmadero.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {datosUsuarios.dispColmadero.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
         {/*Tipo de Acceso al Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO DE ACCESO AL COLMADO</Text>
 
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Acceso Colmado</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {this.state.camposForm.tipoAccesoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {datosUsuarios.tipoAccesoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
         {/*Tamaño del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TAMAñO DEL COLMADO</Text>
 
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tamaño del Colmado</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {this.state.camposForm.tamañoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {datosUsuarios.tamanoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
         {/*Capacidad del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>CAPACIDAD DEL COLMADO</Text>
-        {this.state.camposForm.capacidadColmadoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
+        {datosUsuarios.capacidadColmadoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
-        <TextInputComponent identificador="Cantidad de Deliverys" funcion={this.crearJson} default={this.state.default}/>
+        <TextInputComponent identificador="Cantidad de Deliverys" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Tipo Ventana*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO VENTANA</Text>
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tipo Ventana</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.puntoVenta} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {this.state.camposForm.tipoVentana.map((campo)=><Picker.Item label={campo} value={campo} />)}
+        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+          {datosUsuarios.tipoVentana.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
-        <TextInputComponent identificador="Cantidad Tramos Ventana" funcion={this.crearJson} default={this.state.default}/>
+        <TextInputComponent identificador="Cantidad Tramos Ventana" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Iniciativas de Visibilidad*/}
         <Text style={iniciar_seccion_styles.secciones}>INICIATIVAS DE VISIBILIDAD</Text>
-        {this.state.camposForm.iniciativasVisibilidad.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
+        {datosUsuarios.iniciativasVisibilidad.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
         {/*Surtido Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>SURTIDO COLMADO</Text>
-        {this.state.camposForm.surtidoColmado.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
+        {datosUsuarios.surtidoColmado.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
         {/*Actividad Competitiva*/}
         <Text style={iniciar_seccion_styles.secciones}>ACTIVIDAD COMPETITIVA</Text>
-        {this.state.camposForm.actividadCompetitiva.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
-
-        <Text style={iniciar_seccion_styles.secciones}>COMENTARIOS GENERALES</Text>
-        {this.state.camposForm.map((campo)=><TextBoxInputCustom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+        {datosUsuarios.actividadCompetitiva.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarMedidas}/>
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarMedidas}>Listo</Text>}
