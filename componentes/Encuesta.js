@@ -139,34 +139,26 @@ export default class Encuesta extends Component{
 
         {/*Estados de los Colmados*/}
         <Text style={iniciar_seccion_styles.secciones}>ESTADO DEL COLMADO</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {datosUsuarios.estadoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
-        </Picker>
+        <ComboBox identificacion="Estado del colmado" datos={datosUsuarios.estadoColmado} funcion={this.crearJson}/>
 
         {/*Disosicion del Colmadero*/}
         <Text style={iniciar_seccion_styles.secciones}>DISPOSICION DEL COLMADERO</Text>
         {datosUsuarios.dispColmaderoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Disposicion Colmadero</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {datosUsuarios.dispColmadero.map((campo)=><Picker.Item label={campo} value={campo} />)}
-        </Picker>
+        <ComboBox identificacion="Disposicion Colmadero" datos={datosUsuarios.dispColmadero} funcion={this.crearJson}/>
 
         {/*Tipo de Acceso al Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO DE ACCESO AL COLMADO</Text>
 
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Acceso Colmado</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {datosUsuarios.tipoAccesoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
-        </Picker>
+        <ComboBox identificacion="Acceso Colmado" datos={datosUsuarios.tipoAccesoColmado} funcion={this.crearJson}/>
 
         {/*Tamaño del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TAMAñO DEL COLMADO</Text>
 
-        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tamaño del Colmado</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {datosUsuarios.tamanoColmado.map((campo)=><Picker.Item label={campo} value={campo} />)}
-        </Picker>
+        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tamano del Colmado</Text>
+        <ComboBox identificacion="Tamano Colmado" datos={datosUsuarios.tamanoColmado} funcion={this.crearJson}/>
 
         {/*Capacidad del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>CAPACIDAD DEL COLMADO</Text>
@@ -176,10 +168,7 @@ export default class Encuesta extends Component{
 
         {/*Tipo Ventana*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO VENTANA</Text>
-        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tipo Ventana</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
-          {datosUsuarios.tipoVentana.map((campo)=><Picker.Item label={campo} value={campo} />)}
-        </Picker>
+        <ComboBox identificacion="Tipo Ventana" datos={datosUsuarios.tipoVentana} funcion={this.crearJson}/>
 
         <TextInputComponent identificador="Cantidad Tramos Ventana" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
