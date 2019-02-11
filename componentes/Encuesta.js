@@ -164,13 +164,13 @@ export default class Encuesta extends Component{
         <Text style={iniciar_seccion_styles.secciones}>CAPACIDAD DEL COLMADO</Text>
         {datosUsuarios.capacidadColmadoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
-        <TextInputComponent identificador="Cantidad de Deliverys" funcion={this.crearJson} default="***SELECCIONAR***"/>
+        <TextInputComponent identificacion="Cantidad de Deliverys" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Tipo Ventana*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO VENTANA</Text>
         <ComboBox identificacion="Tipo Ventana" datos={datosUsuarios.tipoVentana} funcion={this.crearJson}/>
 
-        <TextInputComponent identificador="Cantidad Tramos Ventana" funcion={this.crearJson} default="***SELECCIONAR***"/>
+        <TextInputComponent identificacion="Cantidad Tramos Ventana" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Iniciativas de Visibilidad*/}
         <Text style={iniciar_seccion_styles.secciones}>INICIATIVAS DE VISIBILIDAD</Text>
@@ -183,6 +183,9 @@ export default class Encuesta extends Component{
         {/*Actividad Competitiva*/}
         <Text style={iniciar_seccion_styles.secciones}>ACTIVIDAD COMPETITIVA</Text>
         {datosUsuarios.actividadCompetitiva.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
+
+        {/*COMENTARIOS*/}
+        <TextInputComponent identificacion="Comentarios" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarMedidas}/>

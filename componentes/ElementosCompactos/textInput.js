@@ -29,7 +29,7 @@ export default class TextInputComponent extends Component{
 
 const comboBoxStyle=StyleSheet.create({
   text_subitem:{
-    color:'black',
+    color:'white',
     fontWeight:'bold',
     fontSize:15,
   },
@@ -50,6 +50,7 @@ const comboBoxStyle=StyleSheet.create({
     width:'100%',
     borderColor:'black',
     borderWidth:1,
+    backgroundColor:'white'
 
   }
 });

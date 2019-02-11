@@ -38,10 +38,11 @@ const comboBoxStyle=StyleSheet.create({
   },
   combobox:{
     fontSize:25,
-    color:'white',
+    color:'black',
     height:50,
     width:'100%',
     borderColor:'white',
     borderWidth:3,
+    backgroundColor:'white'
   }
 });
