@@ -10,7 +10,7 @@ export default class Encuesta extends Component{
     super(props);
     this.setState({
       default:"**Seleccionar**",
-      disableButton:true
+      disableButton:false
     })
     //Funciones
   };
