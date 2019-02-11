@@ -194,8 +194,10 @@ export default class Encuesta extends Component{
         <Text style={iniciar_seccion_styles.secciones}>ACTIVIDAD COMPETITIVA</Text>
         {datosUsuarios.actividadCompetitiva.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson} value={campo}/>)}
 
+        {/*
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarMedidas}/>
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarMedidas}>Listo</Text>}
+        */}
 
       </ScrollView>
     )
