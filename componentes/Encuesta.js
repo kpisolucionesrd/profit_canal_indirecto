@@ -139,26 +139,26 @@ export default class Encuesta extends Component{
 
         {/*Estados de los Colmados*/}
         <Text style={iniciar_seccion_styles.secciones}>ESTADO DEL COLMADO</Text>
-        <ComboBox identificacion="Estado del colmado" datos={datosUsuarios.estadoColmado} funcion={this.crearJson}/>
+        <ComboBox identificacion="Estado del colmado" datos={datosUsuarios.estadoColmado} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Disosicion del Colmadero*/}
         <Text style={iniciar_seccion_styles.secciones}>DISPOSICION DEL COLMADERO</Text>
         {datosUsuarios.dispColmaderoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Disposicion Colmadero</Text>
-        <ComboBox identificacion="Disposicion Colmadero" datos={datosUsuarios.dispColmadero} funcion={this.crearJson}/>
+        <ComboBox identificacion="Disposicion Colmadero" datos={datosUsuarios.dispColmadero} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Tipo de Acceso al Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO DE ACCESO AL COLMADO</Text>
 
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Acceso Colmado</Text>
-        <ComboBox identificacion="Acceso Colmado" datos={datosUsuarios.tipoAccesoColmado} funcion={this.crearJson}/>
+        <ComboBox identificacion="Acceso Colmado" datos={datosUsuarios.tipoAccesoColmado} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Tamaño del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TAMAñO DEL COLMADO</Text>
 
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tamano del Colmado</Text>
-        <ComboBox identificacion="Tamano Colmado" datos={datosUsuarios.tamanoColmado} funcion={this.crearJson}/>
+        <ComboBox identificacion="Tamano Colmado" datos={datosUsuarios.tamanoColmado} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Capacidad del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>CAPACIDAD DEL COLMADO</Text>
@@ -168,7 +168,7 @@ export default class Encuesta extends Component{
 
         {/*Tipo Ventana*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO VENTANA</Text>
-        <ComboBox identificacion="Tipo Ventana" datos={datosUsuarios.tipoVentana} funcion={this.crearJson}/>
+        <ComboBox identificacion="Tipo Ventana" datos={datosUsuarios.tipoVentana} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         <TextInputComponent identificacion="Cantidad Tramos Ventana" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
