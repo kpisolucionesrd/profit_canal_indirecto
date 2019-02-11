@@ -8,10 +8,10 @@ import {Icon,Button} from 'react-native-elements';
 export default class Encuesta extends Component{
   constructor(props){
     super(props);
-    this.setState({
+    this.state={
       default:"**Seleccionar**",
       disableButton:false
-    })
+    }
     //Funciones
   };
 
