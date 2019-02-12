@@ -10,7 +10,10 @@ export default class Encuesta extends Component{
     super(props);
     this.state={
       default:"**Seleccionar**",
-      disableButton:false
+      disableButton:false,
+      objetoDatos:{
+        colmado:"Sin Seleccionar"
+      }
     }
     //Funciones
   };
@@ -25,37 +28,37 @@ export default class Encuesta extends Component{
     const { navigation } = this.props;
     const datosUsuario=navigation.getParam('datosUsuario','some default value');
 
-    let objetoDatos=this.state.objetoDatosMedidas; //Obtener el Json del constructor
-
-    if(idCampo.includes("CD80-")){
-      objetoDatos.cremasDetales80[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
-    }else if (idCampo.includes("HD50-")){
-      objetoDatos.hiloDental50[idCampo]=idCampo+"|"+nuevo_resultado
-    }else if (idCampo.includes("S65-")){
-      objetoDatos.suavizantes65[idCampo]=idCampo+"|"+nuevo_resultado
-    }else if (idCampo.includes("LL45-")){
-      objetoDatos.lavaplatosLiquidos45[idCampo]=idCampo+"|"+nuevo_resultado
-    }else if (idCampo.includes("CP65-")){
-      objetoDatos.cepillosDentales[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
-    }else if (idCampo.includes("JT50-")){
-      objetoDatos.jabonesTocador50[idCampo]=idCampo+"|"+nuevo_resultado
-    }else if (idCampo.includes("EB40-")){
-      objetoDatos.enjuagueBucal40[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
-    }else if (idCampo.includes("D30-")){
-      objetoDatos.desodorante30[idCampo]=idCampo+"|"+nuevo_resultado
-    }else if (idCampo.includes("LC50-")){
-      objetoDatos.lavaplatosCrema50[idCampo]=idCampo+"|"+nuevo_resultado
-    }else if (idCampo.includes("DESpul-")){
-      objetoDatos.desinfectantes[idCampo]=idCampo+"|"+nuevo_resultado
-    }else{
-      alert("Campos no identificados")
-    }
+    let objetoDatos=this.state.objetoDatos; //Obtener el Json del constructor
+    objetoDatos.[idCampo]=nuevo_resultado
+    // if(idCampo.includes("CD80-")){
+    //   objetoDatos.cremasDetales80[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
+    // }else if (idCampo.includes("HD50-")){
+    //   objetoDatos.hiloDental50[idCampo]=idCampo+"|"+nuevo_resultado
+    // }else if (idCampo.includes("S65-")){
+    //   objetoDatos.suavizantes65[idCampo]=idCampo+"|"+nuevo_resultado
+    // }else if (idCampo.includes("LL45-")){
+    //   objetoDatos.lavaplatosLiquidos45[idCampo]=idCampo+"|"+nuevo_resultado
+    // }else if (idCampo.includes("CP65-")){
+    //   objetoDatos.cepillosDentales[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
+    // }else if (idCampo.includes("JT50-")){
+    //   objetoDatos.jabonesTocador50[idCampo]=idCampo+"|"+nuevo_resultado
+    // }else if (idCampo.includes("EB40-")){
+    //   objetoDatos.enjuagueBucal40[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
+    // }else if (idCampo.includes("D30-")){
+    //   objetoDatos.desodorante30[idCampo]=idCampo+"|"+nuevo_resultado
+    // }else if (idCampo.includes("LC50-")){
+    //   objetoDatos.lavaplatosCrema50[idCampo]=idCampo+"|"+nuevo_resultado
+    // }else if (idCampo.includes("DESpul-")){
+    //   objetoDatos.desinfectantes[idCampo]=idCampo+"|"+nuevo_resultado
+    // }else{
+    //   alert("Campos no identificados")
+    // }
     this.setState({
       objetoDatos:objetoDatos,
     })
   };
 
-  completarMedidas=async()=>{
+  completarEncuesta=async()=>{
     const { navigation } = this.props;
     const datosUsuario=navigation.getParam('datosUsuario','some default value');
     const datosRadar=navigation.getParam('dataRadarExhibiciones','some default value');
@@ -187,8 +190,8 @@ export default class Encuesta extends Component{
         {/*COMENTARIOS*/}
         <TextInputComponent identificacion="Comentarios" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
-        <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarMedidas}/>
-        {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarMedidas}>Listo</Text>}
+        <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarEncuesta}/>
+        {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarEncuesta}>Listo</Text>}
       </ScrollView>
     )
   }
