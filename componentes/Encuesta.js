@@ -136,6 +136,7 @@ export default class Encuesta extends Component{
     /*Guardar objeto*/
     this.setState({
       objetoDatos:objetoDatos,
+      colmado:valorSeleccionado
     });
   };
 
@@ -149,7 +150,7 @@ export default class Encuesta extends Component{
 
         {/*Label Seleccionar Colmado*/}
         <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Favor Seleccionar Colmado</Text>
-        <Picker onValueChange={this.gettingComboBox} selectedValue="***SELECCIONAR***" style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
+        <Picker onValueChange={this.gettingComboBox} selectedValue={this.state.colmado} style={{backgroundColor:'white',width:'100%',marginBottom:30}}>
           {colmados.map((campo)=><Picker.Item label={campo} value={campo} />)}
         </Picker>
 
