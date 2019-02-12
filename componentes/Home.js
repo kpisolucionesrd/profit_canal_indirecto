@@ -64,7 +64,7 @@ export default class Home extends Component{
         }else{
           alert("Contraseña Incorrecta!")
         }
-      }
+    }
   };
 
   VerificacionLoggin=async()=>{

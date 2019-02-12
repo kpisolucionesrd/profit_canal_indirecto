@@ -9,7 +9,7 @@ export default class MenuMercaderista extends Component{
   };
 
   static navigationOptions = {
-  title: 'Encuesta Mercaderista',
+    title: 'Encuesta Mercaderista',
   };
 
   //Eventos

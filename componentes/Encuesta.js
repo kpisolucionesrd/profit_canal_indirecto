@@ -29,7 +29,7 @@ export default class Encuesta extends Component{
     const datosUsuario=navigation.getParam('datosUsuario','some default value');
 
     let objetoDatos=this.state.objetoDatos; //Obtener el Json del constructor
-    objetoDatos.[idCampo]=nuevo_resultado
+    objetoDatos[idCampo]=nuevo_resultado
     // if(idCampo.includes("CD80-")){
     //   objetoDatos.cremasDetales80[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
     // }else if (idCampo.includes("HD50-")){
@@ -61,68 +61,81 @@ export default class Encuesta extends Component{
   completarEncuesta=async()=>{
     const { navigation } = this.props;
     const datosUsuario=navigation.getParam('datosUsuario','some default value');
-    const datosRadar=navigation.getParam('dataRadarExhibiciones','some default value');
 
-    if(
-      Object.keys(this.state.objetoDatosMedidas.cremasDetales80).length==this.state.cremasDetales80.length &
-      Object.keys(this.state.objetoDatosMedidas.hiloDental50).length==this.state.hiloDental50.length &
-      Object.keys(this.state.objetoDatosMedidas.suavizantes65).length==this.state.suavizantes65.length &
-      Object.keys(this.state.objetoDatosMedidas.lavaplatosLiquidos45).length==this.state.lavaplatosLiquidos45.length &
-      Object.keys(this.state.objetoDatosMedidas.cepillosDentales).length==this.state.cepillosDentales.length &
-      Object.keys(this.state.objetoDatosMedidas.jabonesTocador50).length==this.state.jabonesTocador50.length &
-      Object.keys(this.state.objetoDatosMedidas.enjuagueBucal40).length==this.state.enjuagueBucal40.length &
-      Object.keys(this.state.objetoDatosMedidas.desodorante30).length==this.state.desodorante30.length &
-      Object.keys(this.state.objetoDatosMedidas.lavaplatosCrema50).length==this.state.lavaplatosCrema50.length &
-      Object.keys(this.state.objetoDatosMedidas.desinfectantes).length==this.state.desinfectantes.length
-    ){
-      //Desabilitar button
-      this.setState({
-        disableButton:true
-      })
 
-      //Cargar los datos
-      data={
-        identificador:datosUsuario.identificador,
-        fecha_ejecucion:this.state.fecha_hoy.getDay()+"-"+this.state.fecha_hoy.getMonth()+"-"+this.state.fecha_hoy.getFullYear(),
-        datosMedidas:JSON.stringify(this.state.objetoDatosMedidas),
-      }
-      await fetch("http://167.99.167.145/api/canalDirecto/DatosCompletados",{
-        method:'POST',
-        headers:{
-          Accept:'application/json',
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(data)
-      });
+    let objetoDatos=this.state.objetoDatos;
+    objetoDatos["id"]=datosUsuario
+    alert(JSON.stringify(this.state.objetoDatos))
+    // const { navigation } = this.props;
+    // const datosUsuario=navigation.getParam('datosUsuario','some default value');
+    //const datosRadar=navigation.getParam('dataRadarExhibiciones','some default value');
 
-      //cargar el colmado completado
-      dataCamposCompletados={
-        identificador:datosUsuario.identificador,
-        fecha_ejecucion:this.state.fecha_hoy.getDay()+"-"+this.state.fecha_hoy.getMonth()+"-"+this.state.fecha_hoy.getFullYear(),
-        mercaderistaCallValue:[this.state.puntoVenta],
-        encuesta:"MedidasEspacios"
-      }
-      await fetch("http://167.99.167.145/api/canalDirecto/CamposCompletados",{
-        method:'POST',
-        headers:{
-          Accept:'application/json',
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(dataCamposCompletados)
-      });
-
-      //Volver al menu
-      await this.props.navigation.navigate(datosUsuario.perfil,{
-        datosUsuario:datosUsuario,
-      })
-    }else{
-      alert("Faltan Campos por completar")
-    }
+    // if(
+    //   Object.keys(this.state.objetoDatosMedidas.cremasDetales80).length==this.state.cremasDetales80.length &
+    //   Object.keys(this.state.objetoDatosMedidas.hiloDental50).length==this.state.hiloDental50.length &
+    //   Object.keys(this.state.objetoDatosMedidas.suavizantes65).length==this.state.suavizantes65.length &
+    //   Object.keys(this.state.objetoDatosMedidas.lavaplatosLiquidos45).length==this.state.lavaplatosLiquidos45.length &
+    //   Object.keys(this.state.objetoDatosMedidas.cepillosDentales).length==this.state.cepillosDentales.length &
+    //   Object.keys(this.state.objetoDatosMedidas.jabonesTocador50).length==this.state.jabonesTocador50.length &
+    //   Object.keys(this.state.objetoDatosMedidas.enjuagueBucal40).length==this.state.enjuagueBucal40.length &
+    //   Object.keys(this.state.objetoDatosMedidas.desodorante30).length==this.state.desodorante30.length &
+    //   Object.keys(this.state.objetoDatosMedidas.lavaplatosCrema50).length==this.state.lavaplatosCrema50.length &
+    //   Object.keys(this.state.objetoDatosMedidas.desinfectantes).length==this.state.desinfectantes.length
+    // ){
+    //   //Desabilitar button
+    //   this.setState({
+    //     disableButton:true
+    //   })
+    //
+    //   //Cargar los datos
+    //   data={
+    //     identificador:datosUsuario.identificador,
+    //     fecha_ejecucion:this.state.fecha_hoy.getDay()+"-"+this.state.fecha_hoy.getMonth()+"-"+this.state.fecha_hoy.getFullYear(),
+    //     datosMedidas:JSON.stringify(this.state.objetoDatosMedidas),
+    //   }
+    //   await fetch("http://167.99.167.145/api/canalDirecto/DatosCompletados",{
+    //     method:'POST',
+    //     headers:{
+    //       Accept:'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body:JSON.stringify(data)
+    //   });
+    //
+    //   //cargar el colmado completado
+    //   dataCamposCompletados={
+    //     identificador:datosUsuario.identificador,
+    //     fecha_ejecucion:this.state.fecha_hoy.getDay()+"-"+this.state.fecha_hoy.getMonth()+"-"+this.state.fecha_hoy.getFullYear(),
+    //     mercaderistaCallValue:[this.state.puntoVenta],
+    //     encuesta:"MedidasEspacios"
+    //   }
+    //   await fetch("http://167.99.167.145/api/canalDirecto/CamposCompletados",{
+    //     method:'POST',
+    //     headers:{
+    //       Accept:'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body:JSON.stringify(dataCamposCompletados)
+    //   });
+    //
+    //   //Volver al menu
+    //   await this.props.navigation.navigate(datosUsuario.perfil,{
+    //     datosUsuario:datosUsuario,
+    //   })
+    // }else{
+    //   alert("Faltan Campos por completar")
+    // }
   };
 
   gettingComboBox=async(valorSeleccionado)=>{
+
+    //Obtener el Json del constructor
+    let objetoDatos=this.state.objetoDatos;
+    objetoDatos[colmado]=valorSeleccionado
+
+    /*Guardar objeto*/
     this.setState({
-      puntoVenta:valorSeleccionado,
+      objetoDatos:objetoDatos,
     });
   };
 
@@ -194,8 +207,9 @@ export default class Encuesta extends Component{
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarEncuesta}>Listo</Text>}
       </ScrollView>
     )
-  }
-}
+  } //Cierre del metodo render
+
+} //Cierre de la clase
 
 const iniciar_seccion_styles=StyleSheet.create({
   main:{
