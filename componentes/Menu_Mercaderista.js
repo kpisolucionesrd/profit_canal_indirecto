@@ -58,9 +58,9 @@ export default class MenuMercaderista extends Component{
         <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Feb-01</Text>
       </ScrollView>
     )
-  }
-}
+  } //Cierre del metodo render
 
+} //Cierre de la clase
 const iniciar_seccion_styles=StyleSheet.create({
   main:{
     backgroundColor:'red',
