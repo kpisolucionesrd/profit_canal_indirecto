@@ -54,15 +54,22 @@ export default class Encuesta extends Component{
     })
 
     //Verificar si los campos fueron completados
-    if(true){
-      alert(Object.keys(this.state.objetoEncuesta).length)
-    }else{
+    if(Object.keys(this.state.objetoEncuesta).length>5){
+
+
+
       //Eliminar el colmado completado de la lista y guardar el vector
       let datosAgenda=await AsyncStorage.getItem("datosAgenda");
       let colmados=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"];
-      colmados.splice(colmados.indexOf(this.state.colmado),1) //Eliminar
+      colmados.splice(colmados.indexOf(this.state.colmado),1); //Eliminar
       datosAgenda["colmados"]=colmados;
       await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
+
+      //Prueba
+      alert(Object.keys(this.state.objetoEncuesta).length)
+
+    }else{
+      alert("Faltan campos por completar")
     }
 
   };
