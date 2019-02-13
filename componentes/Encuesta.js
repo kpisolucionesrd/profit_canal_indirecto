@@ -54,9 +54,7 @@ export default class Encuesta extends Component{
     })
 
     //Verificar si los campos fueron completados
-    if(Object.keys(this.state.objetoEncuesta).length>5){
-
-
+    if(Object.keys(this.state.objetoEncuesta).length>5 && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
 
       //Eliminar el colmado completado de la lista y guardar el vector
       let datosAgenda=await AsyncStorage.getItem("datosAgenda");
@@ -69,7 +67,11 @@ export default class Encuesta extends Component{
       alert(Object.keys(this.state.objetoEncuesta).length)
 
     }else{
-      alert("Faltan campos por completar")
+      if(this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
+        alert("Favor seleccionar colmado")
+      }else{
+        alert("Faltan campos por completar")
+      }
     }
 
   };
@@ -78,7 +80,7 @@ export default class Encuesta extends Component{
 
     //Obtener el Json del constructor
     let objetoDatos=this.state.objetoDatos;
-    objetoDatos[colmado]=valorSeleccionado
+    objetoDatos["colmado"]=valorSeleccionado
 
     /*Guardar objeto*/
     this.setState({
