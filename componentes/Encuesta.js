@@ -54,12 +54,13 @@ export default class Encuesta extends Component{
     })
 
     //Verificar si los campos fueron completados
-    Object.keys(objetoDatos.encuesta).forEach(function(elemento){
+    CamposVacios=Object.keys(objetoDatos.encuesta).map(function(elemento){
       if(elemento=="***SELECCIONAR***" || elemento=="" || elemento==null){
-        alert("El campo "+elemento+" Esta sin completar");
-        break
+        return elemento
       }
     });
+
+    alert("Los Campos Vacios son:\n"+CamposVacios)
   };
 
   gettingComboBox=async(valorSeleccionado)=>{
