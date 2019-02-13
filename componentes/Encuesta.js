@@ -60,7 +60,7 @@ export default class Encuesta extends Component{
       }
     });
 
-    alert("Los Campos Vacios son:\n"+CamposVacios)
+    alert("Los Campos Vacios son:\n"+CamposVacios.length)
   };
 
   gettingComboBox=async(valorSeleccionado)=>{
