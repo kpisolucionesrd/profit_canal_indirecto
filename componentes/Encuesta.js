@@ -67,7 +67,7 @@ export default class Encuesta extends Component{
       alert(Object.keys(this.state.objetoEncuesta).length)
 
     }else{
-      if(this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
+      if(this.state.objetoEncuesta["colmado"]=="***SELECCIONAR***"){
         alert("Favor seleccionar colmado")
       }else{
         alert("Faltan campos por completar")
@@ -80,7 +80,7 @@ export default class Encuesta extends Component{
 
     //Obtener el Json del constructor
     let objetoDatos=this.state.objetoDatos;
-    objetoDatos["colmado"]=valorSeleccionado
+    objetoDatos.encuesta["colmado"]=valorSeleccionado
 
     /*Guardar objeto*/
     this.setState({
