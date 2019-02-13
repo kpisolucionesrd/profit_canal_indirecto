@@ -11,6 +11,7 @@ export default class Encuesta extends Component{
     this.state={
       default:"**Seleccionar**",
       disableButton:false,
+      colmado:"***SELECCIONAR***",
       objetoDatos:{
         id:null,
         encuesta:{},
