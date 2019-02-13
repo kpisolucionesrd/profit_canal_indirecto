@@ -18,8 +18,7 @@ export default class MenuMercaderista extends Component{
     datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario")); /*Aqui se encuentra los datos/campos*/
 
     //Obteniendo colmados
-    objetoDatosAgenda=JSON.parse(await AsyncStorage.getItem("datosAgenda"))
-    colmados=objetoDatosAgenda["colmados"]
+    colmados=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"]
 
     //Ir a la encuesta
     this.props.navigation.navigate('Encuesta',{

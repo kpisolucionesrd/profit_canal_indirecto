@@ -54,13 +54,17 @@ export default class Encuesta extends Component{
     })
 
     //Verificar si los campos fueron completados
-    CamposVacios=Object.keys(objetoDatos.encuesta).map(function(elemento){
-      if(elemento=="***SELECCIONAR***" || elemento=="" || elemento==null){
-        return elemento
-      }
-    });
+    if(true){
+      alert(Object.keys(this.state.objetoEncuesta).length)
+    }else{
+      //Eliminar el colmado completado de la lista y guardar el vector
+      let datosAgenda=await AsyncStorage.getItem("datosAgenda");
+      let colmados=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"];
+      colmados.splice(colmados.indexOf(this.state.colmado),1) //Eliminar
+      datosAgenda["colmados"]=colmados;
+      await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
+    }
 
-    alert("Los Campos Vacios son:\n"+CamposVacios.length)
   };
 
   gettingComboBox=async(valorSeleccionado)=>{
