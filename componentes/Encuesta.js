@@ -12,8 +12,11 @@ export default class Encuesta extends Component{
       default:"**Seleccionar**",
       disableButton:false,
       objetoDatos:{
-        colmado:"Sin Seleccionar"
-      }
+        id:null,
+        encuesta:{},
+        fechaInserccion:null
+      },
+      objetoEncuesta:{}
     }
     //Funciones
   };
@@ -28,7 +31,7 @@ export default class Encuesta extends Component{
     const { navigation } = this.props;
     const datosUsuario=navigation.getParam('datosUsuario','some default value');
 
-    let objetoDatos=this.state.objetoDatos; //Obtener el Json del constructor
+    let objetoDatos=this.state.objetoEncuesta; //Obtener el Json del constructor
     objetoDatos[idCampo]=nuevo_resultado
     // if(idCampo.includes("CD80-")){
     //   objetoDatos.cremasDetales80[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
@@ -54,7 +57,7 @@ export default class Encuesta extends Component{
     //   alert("Campos no identificados")
     // }
     this.setState({
-      objetoDatos:objetoDatos,
+      objetoEncuesta:objetoDatos,
     })
   };
 
@@ -64,7 +67,15 @@ export default class Encuesta extends Component{
 
 
     let objetoDatos=this.state.objetoDatos;
-    objetoDatos["id"]=datosUsuario.identificador
+    objetoDatos.id=datosUsuario.identificador
+    objetoDatos.encuesta=this.state.objetoEncuesta
+
+    this.setState({
+      objetoDatos:objetoDatos
+    })
+
+
+
     alert(JSON.stringify(this.state.objetoDatos))
     // const { navigation } = this.props;
     // const datosUsuario=navigation.getParam('datosUsuario','some default value');
