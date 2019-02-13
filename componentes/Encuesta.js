@@ -41,7 +41,7 @@ export default class Encuesta extends Component{
     // }else if (idCampo.includes("CP65-")){
     //   objetoDatos.cepillosDentales[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
     // }else if (idCampo.includes("JT50-")){
-    //   objetoDatos.jabonesTocador50[idCampo]=idCampo+"|"+nuevo_resultado
+    //   objetoDatos.jabonesToador50[idCampo]=idCampo+"|"+nuevo_resultado
     // }else if (idCampo.includes("EB40-")){
     //   objetoDatos.enjuagueBucal40[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
     // }else if (idCampo.includes("D30-")){
