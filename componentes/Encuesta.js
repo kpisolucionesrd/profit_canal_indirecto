@@ -33,29 +33,8 @@ export default class Encuesta extends Component{
 
     let objetoDatos=this.state.objetoEncuesta; //Obtener el Json del constructor
     objetoDatos[idCampo]=nuevo_resultado
-    // if(idCampo.includes("CD80-")){
-    //   objetoDatos.cremasDetales80[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
-    // }else if (idCampo.includes("HD50-")){
-    //   objetoDatos.hiloDental50[idCampo]=idCampo+"|"+nuevo_resultado
-    // }else if (idCampo.includes("S65-")){
-    //   objetoDatos.suavizantes65[idCampo]=idCampo+"|"+nuevo_resultado
-    // }else if (idCampo.includes("LL45-")){
-    //   objetoDatos.lavaplatosLiquidos45[idCampo]=idCampo+"|"+nuevo_resultado
-    // }else if (idCampo.includes("CP65-")){
-    //   objetoDatos.cepillosDentales[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
-    // }else if (idCampo.includes("JT50-")){
-    //   objetoDatos.jabonesToador50[idCampo]=idCampo+"|"+nuevo_resultado
-    // }else if (idCampo.includes("EB40-")){
-    //   objetoDatos.enjuagueBucal40[idCampo]=idCampo+"|"+nuevo_resultado /* Se Queda */
-    // }else if (idCampo.includes("D30-")){
-    //   objetoDatos.desodorante30[idCampo]=idCampo+"|"+nuevo_resultado
-    // }else if (idCampo.includes("LC50-")){
-    //   objetoDatos.lavaplatosCrema50[idCampo]=idCampo+"|"+nuevo_resultado
-    // }else if (idCampo.includes("DESpul-")){
-    //   objetoDatos.desinfectantes[idCampo]=idCampo+"|"+nuevo_resultado
-    // }else{
-    //   alert("Campos no identificados")
-    // }
+
+    //Guardar data en el state
     this.setState({
       objetoEncuesta:objetoDatos,
     })
@@ -65,78 +44,25 @@ export default class Encuesta extends Component{
     const { navigation } = this.props;
     const datosUsuario=navigation.getParam('datosUsuarios','some default value');
 
-    alert(datosUsuario.identificador)
-
     let objetoDatos=this.state.objetoDatos;
-    objetoDatos.id=datosUsuario.identificador
-    objetoDatos.encuesta=this.state.objetoEncuesta
+    objetoDatos.id=datosUsuario.identificador;
+    objetoDatos.encuesta=this.state.objetoEncuesta;
 
+    //Guardar el objeto datos en el statte
     this.setState({
       objetoDatos:objetoDatos
     })
 
+    //Verificar si los campos fueron completados
+    Object.keys(objetoDatos.encuesta).forEach(function(elemento){
+      if(break=="***SELECCIONAR***"){
+        alert("El campo "+elemento+" Esta sin completar");
+        break
+      }
+    });
 
 
-    //alert(JSON.stringify(this.state.objetoDatos))
-    // const { navigation } = this.props;
-    // const datosUsuario=navigation.getParam('datosUsuario','some default value');
-    //const datosRadar=navigation.getParam('dataRadarExhibiciones','some default value');
 
-    // if(
-    //   Object.keys(this.state.objetoDatosMedidas.cremasDetales80).length==this.state.cremasDetales80.length &
-    //   Object.keys(this.state.objetoDatosMedidas.hiloDental50).length==this.state.hiloDental50.length &
-    //   Object.keys(this.state.objetoDatosMedidas.suavizantes65).length==this.state.suavizantes65.length &
-    //   Object.keys(this.state.objetoDatosMedidas.lavaplatosLiquidos45).length==this.state.lavaplatosLiquidos45.length &
-    //   Object.keys(this.state.objetoDatosMedidas.cepillosDentales).length==this.state.cepillosDentales.length &
-    //   Object.keys(this.state.objetoDatosMedidas.jabonesTocador50).length==this.state.jabonesTocador50.length &
-    //   Object.keys(this.state.objetoDatosMedidas.enjuagueBucal40).length==this.state.enjuagueBucal40.length &
-    //   Object.keys(this.state.objetoDatosMedidas.desodorante30).length==this.state.desodorante30.length &
-    //   Object.keys(this.state.objetoDatosMedidas.lavaplatosCrema50).length==this.state.lavaplatosCrema50.length &
-    //   Object.keys(this.state.objetoDatosMedidas.desinfectantes).length==this.state.desinfectantes.length
-    // ){
-    //   //Desabilitar button
-    //   this.setState({
-    //     disableButton:true
-    //   })
-    //
-    //   //Cargar los datos
-    //   data={
-    //     identificador:datosUsuario.identificador,
-    //     fecha_ejecucion:this.state.fecha_hoy.getDay()+"-"+this.state.fecha_hoy.getMonth()+"-"+this.state.fecha_hoy.getFullYear(),
-    //     datosMedidas:JSON.stringify(this.state.objetoDatosMedidas),
-    //   }
-    //   await fetch("http://167.99.167.145/api/canalDirecto/DatosCompletados",{
-    //     method:'POST',
-    //     headers:{
-    //       Accept:'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body:JSON.stringify(data)
-    //   });
-    //
-    //   //cargar el colmado completado
-    //   dataCamposCompletados={
-    //     identificador:datosUsuario.identificador,
-    //     fecha_ejecucion:this.state.fecha_hoy.getDay()+"-"+this.state.fecha_hoy.getMonth()+"-"+this.state.fecha_hoy.getFullYear(),
-    //     mercaderistaCallValue:[this.state.puntoVenta],
-    //     encuesta:"MedidasEspacios"
-    //   }
-    //   await fetch("http://167.99.167.145/api/canalDirecto/CamposCompletados",{
-    //     method:'POST',
-    //     headers:{
-    //       Accept:'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body:JSON.stringify(dataCamposCompletados)
-    //   });
-    //
-    //   //Volver al menu
-    //   await this.props.navigation.navigate(datosUsuario.perfil,{
-    //     datosUsuario:datosUsuario,
-    //   })
-    // }else{
-    //   alert("Faltan Campos por completar")
-    // }
   };
 
   gettingComboBox=async(valorSeleccionado)=>{
