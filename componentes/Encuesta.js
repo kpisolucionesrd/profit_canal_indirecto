@@ -65,6 +65,7 @@ export default class Encuesta extends Component{
     const { navigation } = this.props;
     const datosUsuario=navigation.getParam('datosUsuario','some default value');
 
+    alert(datosUsuario.identificador)
 
     let objetoDatos=this.state.objetoDatos;
     objetoDatos.id=datosUsuario.identificador
@@ -76,7 +77,7 @@ export default class Encuesta extends Component{
 
 
 
-    alert(JSON.stringify(this.state.objetoDatos))
+    //alert(JSON.stringify(this.state.objetoDatos))
     // const { navigation } = this.props;
     // const datosUsuario=navigation.getParam('datosUsuario','some default value');
     //const datosRadar=navigation.getParam('dataRadarExhibiciones','some default value');

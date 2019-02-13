@@ -27,8 +27,6 @@ export default class MenuMercaderista extends Component{
       colmados:colmados
     });
 
-    //Prueba
-    alert(datosUsuarios.identificador)
   };
 
   encuestaPrecios(){
