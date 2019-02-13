@@ -55,14 +55,11 @@ export default class Encuesta extends Component{
 
     //Verificar si los campos fueron completados
     Object.keys(objetoDatos.encuesta).forEach(function(elemento){
-      if(break=="***SELECCIONAR***"){
+      if(elemento=="***SELECCIONAR***" || elemento=="" || elemento==null){
         alert("El campo "+elemento+" Esta sin completar");
         break
       }
     });
-
-
-
   };
 
   gettingComboBox=async(valorSeleccionado)=>{
