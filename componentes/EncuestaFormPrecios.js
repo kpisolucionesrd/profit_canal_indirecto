@@ -44,7 +44,7 @@ export default class EncuestaPrecios extends Component{
 
   completarEncuesta=async()=>{
     const { navigation } = this.props;
-    const datosUsuario=navigation.getParam('datosUsuarios','some default value');
+    const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
     let objetoDatos=this.state.objetoDatos;
     objetoDatos.id=datosUsuario.identificador;

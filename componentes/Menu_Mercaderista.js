@@ -39,7 +39,7 @@ export default class MenuMercaderista extends Component{
 
     //Ir a encuesta precios
     this.props.navigation.navigate('EncuestaPrecios',{
-      datosUsuario:datosUsuario,
+      datosUsuarios:datosUsuarios,
       colmados:colmados
     })
   };
