@@ -55,7 +55,11 @@ export default class MenuCamara extends Component{
       }else{
         alert("La cantidad de fotos debe ser mayor a 2");
       }
-  };
+  }catch(e)
+  {
+    alert(e)
+  }
+};
 
   cargarIMG=async(imagenURI,index,vector)=>{
     /* Esta funcion se utiliza para enviar las imagenes al servidor*/
