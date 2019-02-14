@@ -45,10 +45,12 @@ export default class EncuestaPrecios extends Component{
   completarEncuesta=async()=>{
     const { navigation } = this.props;
     const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
+    const CantCampos=datosUsuarios.CantCampos;
 
     let objetoDatos=this.state.objetoDatos;
     objetoDatos.id=datosUsuario.identificador;
     objetoDatos.encuesta=this.state.objetoEncuesta;
+    objetoDatos.tipoEncuesta="FormularioPrecios";
 
     //Guardar el objeto datos en el statte
     this.setState({
@@ -56,14 +58,14 @@ export default class EncuestaPrecios extends Component{
     })
 
     //Verificar si los campos fueron completados
-    if(Object.keys(this.state.objetoEncuesta).length>5 && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
+    if(Object.keys(this.state.objetoEncuesta).length==CantCampos && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
 
       //Eliminar el colmado completado de la lista y guardar el vector
       let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
-      let colmados=datosAgenda["colmados"];
+      let colmados=datosAgenda["colmadosFormPrecios"];
       indiceEliminar=colmados.indexOf(this.state.colmado)
       colmados.splice(indiceEliminar,1); //Eliminar
-      datosAgenda["colmados"]=colmados;
+      datosAgenda["colmadosFormPrecios"]=colmados;
       await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
 
       //Ir al MenuCamara
@@ -113,6 +115,14 @@ export default class EncuestaPrecios extends Component{
         {/*Cuidado Oral*/}
         <Text style={iniciar_seccion_styles.secciones}>CUIDADO ORAL</Text>
         {datosUsuarios.cuidadoOral.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default="***SELECCIONAR***"/>)}
+
+        {/*Cuidado Personal*/}
+        <Text style={iniciar_seccion_styles.secciones}>CUIDADO PERSONAL</Text>
+        {datosUsuarios.cuidadoPersonal.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default="***SELECCIONAR***"/>)}
+
+        {/*Cuidado Hogal*/}
+        <Text style={iniciar_seccion_styles.secciones}>CUIDADO HOGAR</Text>
+        {datosUsuarios.cuidadoHogar.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default="***SELECCIONAR***"/>)}
 
         {/*Menu de Procesar*/}
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarEncuesta}/>

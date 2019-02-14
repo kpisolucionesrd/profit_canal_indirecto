@@ -48,6 +48,7 @@ export default class Encuesta extends Component{
     let objetoDatos=this.state.objetoDatos;
     objetoDatos.id=datosUsuario.identificador;
     objetoDatos.encuesta=this.state.objetoEncuesta;
+    objetoDatos.tipoEncuesta="Encuesta";
 
     //Guardar el objeto datos en el statte
     this.setState({
