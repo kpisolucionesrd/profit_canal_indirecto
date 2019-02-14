@@ -64,7 +64,7 @@ export default class CamaraTaker extends Component{
       <ScrollView>
         <RNCamera ref={ref => {this.camera = ref;}} style={cameraView.cameraStyle} flashMode={RNCamera.Constants.FlashMode.on} type={RNCamera.Constants.Type.back} permissionDialogTitle={'Permission to use camera'} permissionDialogMessage={'We need your permission to use your camera phone'}/>
         <Icon name='camera' type='entypo' color='red' iconStyle={{marginLeft:300}} size={40} onPress={this.capturarFoto}/>
-        <Text style={{marginTop:25,color:'red',fontWeight:'bold',fontSize:20,marginBottom:40}}>Cantidad de fotos: {this.state.fotos.length}</Text>
+        <Text style={{marginTop:25,color:'red',fontWeight:'bold',fontSize:20,marginBottom:40}}>Cantidad de fotos: {this.state.fotosVector.length}</Text>
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300,color:'red'}} size={40} onPress={this.finishCam}/>
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'red',fontSize:15}} onPress={this.finishCam}>Listo</Text>}
       </ScrollView>
