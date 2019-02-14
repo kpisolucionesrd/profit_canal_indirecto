@@ -65,8 +65,11 @@ export default class Encuesta extends Component{
       datosAgenda["colmados"]=colmados;
       await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
 
-      //Prueba
-      alert(colmados)
+      //Ir al MenuCamara
+      this.props.navigation.navigate('MenuCamara',{
+        datosUsuarios:datosUsuarios,
+        datosEncuesta:objetoDatos
+      });
 
     }else{
       if(this.state.objetoEncuesta["colmado"]=="***SELECCIONAR***" || this.state.objetoEncuesta["colmado"]==null){

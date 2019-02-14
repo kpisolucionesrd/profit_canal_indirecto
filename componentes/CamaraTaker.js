@@ -8,38 +8,49 @@ export default class CamaraTaker extends Component{
     super(props);
     this.state={
       fecha_hoy:new Date(), //Fecha del dia de hoy
-      fotos:[],
+      fotosObjeto:{},
+      fotosVector:[],
       disableButton:false,
     }
   }
 
   static navigationOptions = {
-  title: 'Tomar Fotos FlashTeam',
+    title: 'Tomar Fotos',
   };
 
   //Eventos
   capturarFoto=async()=>{
     /* Esta funcion se utiliza para capturar foto */
     const { navigation } = this.props;
+    const datosEncuesta=navigation.getParam('datosEncuesta');
 
-    const fotos=await this.state.fotos;
-    const puntoVenta=navigation.getParam('puntoVenta');
+    //elementos FotosVector & fotosObjeto
+    const fotosVector=await this.state.fotosVector;
+    const fotosObjeto=await this.state.fotosObjeto;
+
+    //Tomando imagenes
     const options = { quality: 0.8,skipProcessing:true};
     const data = await this.camera.takePictureAsync(options);
-    fotos.push(data.uri);
+
+    //Insertando imagen tomada
+    fotosVector.push(data.uri);
+
+    //Guardar el objeto
+    fotosObjeto[datosEncuesta.encuesta["colmado"]+"__"+datosEncuesta.id]=fotosVector
+
+    //Guardando estados
     this.setState({
-      fotos:fotos
+      fotosVector:fotosVector,
+      fotosObjeto:fotosObjeto
     });
   }
 
   finishCam=async()=>{
     /*Verificar si la cantidad es la correcta*/
     const { navigation } = this.props;
-    const puntoVenta=navigation.getParam('puntoVenta');
-    if(await this.state.fotos.length>0){
-    this.props.navigation.navigate('EncuestaFlashTeam',{
-      fotos:this.state.fotos,
-      puntoVenta:puntoVenta
+    if(await this.state.fotosVector.length>0){
+    this.props.navigation.navigate('MenuCamara',{
+      fotosObjeto:this.state.fotosObjeto
     });
     alert("Foto capturada exitosamente!!");
   }else{
