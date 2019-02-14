@@ -91,7 +91,7 @@ export default class MenuCamara extends Component{
     const { navigation } = this.props;
     const datosUsuarios=navigation.getParam('datosUsuarios');
     const datosEncuesta=navigation.getParam('datosEncuesta');
-    const fotos=navigation.getParam('fotos','undefined');
+    const fotos=navigation.getParam('fotos',null);
 
     return(
       <ScrollView style={iniciar_seccion_styles.main}>
@@ -105,7 +105,7 @@ export default class MenuCamara extends Component{
           }
         }/>
         <Text style={{textAlign:'left',color:'white',fontSize:15}}>Imagenes Capturadas</Text>
-        {typeof(fotos)!="undefined" ? <Slideshow dataSource={fotos.map((foto)=>{return{url:foto}})}/>:null}
+        {fotos!=null ? <Slideshow dataSource={fotos.map((foto)=>{return{url:foto}})}/>:null}
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.cargarDataLocal}/>
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15}} onPress={this.cargarDataLocal}>Listo</Text>}
       </ScrollView>
