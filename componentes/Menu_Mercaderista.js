@@ -15,6 +15,7 @@ export default class MenuMercaderista extends Component{
   //Eventos
   iniciarEncuesta=async()=>{
     //Obteniendo campos y datos usuarios
+    const { navigation } = this.props;
     datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario")); /*Aqui se encuentra los datos/campos*/
 
     //Obteniendo colmados
@@ -28,11 +29,18 @@ export default class MenuMercaderista extends Component{
 
   };
 
-  encuestaPrecios(){
+  encuestaPrecios=async()=>{
+    //Obteniendo campos y datos usuarios
     const { navigation } = this.props;
     const datosUsuario=navigation.getParam('datosUsuario','some default value');
-    this.props.navigation.navigate('MedidasEspacios',{
-      datosUsuario:datosUsuario
+
+    //Obteniendo colmados
+    colmados=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"];
+
+    //Ir a encuesta precios
+    this.props.navigation.navigate('EncuestaPrecios',{
+      datosUsuario:datosUsuario,
+      colmados:colmados
     })
   };
 
@@ -55,7 +63,7 @@ export default class MenuMercaderista extends Component{
       <ScrollView style={iniciar_seccion_styles.main}>
         <Text style={{color:'white',fontSize:30,fontWeight:'bold',textAlign:'center',marginBottom:110}}>Hola! Sr. {datosUsuario.nombre}</Text>
         <Button icon={{name:'list',type:'entypo'}} title='Iniciar Encuesta'onPress={this.iniciarEncuesta} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button icon={{name:'list',type:'entypo'}} title='Encuesta Precios'onPress={this.encuestaPrecios.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
+        <Button icon={{name:'list',type:'entypo'}} title='Formulario Precios'onPress={this.encuestaPrecios.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button icon={{name:'list',type:'entypo'}} title='Reiniciar Aplicacion'onPress={this.reiniciarAplicacion.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button icon={{name:'list',type:'entypo'}} title='Cargar Data Al Servidor'onPress={this.cargarServidor.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button icon={{name:'list',type:'entypo'}} title='Estadisticas'onPress={this.estadisticas.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>

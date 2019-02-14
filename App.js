@@ -4,6 +4,7 @@ import MenuMercaderista from './componentes/Menu_Mercaderista.js';
 import Encuesta from './componentes/Encuesta.js';
 import MenuCamara from './componentes/MenuCamara.js';
 import CamaraTaker from './componentes/CamaraTaker.js';
+import EncuestaPrecios from './componentes/EncuestaFormPrecios.js';
 
 
 const App = createStackNavigator(
@@ -12,7 +13,8 @@ const App = createStackNavigator(
     MenuMercaderista:MenuMercaderista,
     Encuesta:Encuesta,
     MenuCamara:MenuCamara,
-    CamaraTaker:CamaraTaker
+    CamaraTaker:CamaraTaker,
+    EncuestaPrecios:EncuestaPrecios
   },
   {
     initialRouteName:"Home"
