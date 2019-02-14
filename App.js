@@ -12,6 +12,7 @@ const App = createStackNavigator(
     MenuMercaderista:MenuMercaderista,
     Encuesta:Encuesta,
     MenuCamara:MenuCamara,
+    CamaraTaker:CamaraTaker
   },
   {
     initialRouteName:"Home"
