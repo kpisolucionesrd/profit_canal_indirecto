@@ -16,7 +16,7 @@ export default class MenuMercaderista extends Component{
   iniciarEncuesta=async()=>{
     //Obteniendo campos y datos usuarios
     const { navigation } = this.props;
-    datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario")); /*Aqui se encuentra los datos/campos*/
+    const datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario")); /*Aqui se encuentra los datos/campo para Encuesta*/
 
     //Obteniendo colmados
     colmados=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"]
@@ -32,10 +32,10 @@ export default class MenuMercaderista extends Component{
   encuestaPrecios=async()=>{
     //Obteniendo campos y datos usuarios
     const { navigation } = this.props;
-    const datosUsuario=navigation.getParam('datosUsuario','some default value');
+    const datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario"));
 
     //Obteniendo colmados
-    colmados=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"];
+    colmados=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmadosFormPrecios"];
 
     //Ir a encuesta precios
     this.props.navigation.navigate('EncuestaPrecios',{

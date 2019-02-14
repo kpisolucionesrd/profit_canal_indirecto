@@ -24,7 +24,7 @@ export default class EncuestaPrecios extends Component{
   };
 
   static navigationOptions = {
-    title: 'Encuesta Mercaderista',
+    title: 'Formulario de Precios',
   };
 
   //Eventos
@@ -112,8 +112,9 @@ export default class EncuestaPrecios extends Component{
 
         {/*Cuidado Oral*/}
         <Text style={iniciar_seccion_styles.secciones}>CUIDADO ORAL</Text>
-        <TextBoxInputCustomNumber identificacion="Menta 22ML" funcion={this.crearJson} default="***SELECCIONAR***"/>
+        {datosUsuarios.cuidadoOral.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default="***SELECCIONAR***"/>)}
 
+        {/*Menu de Procesar*/}
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarEncuesta}/>
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarEncuesta}>Listo</Text>}
       </ScrollView>

@@ -56,7 +56,6 @@ export default class Home extends Component{
           angendaRequestJSON=await angendaRequest.json()
           AsyncStorage.setItem("datosAgenda",JSON.stringify(angendaRequestJSON[0]))
 
-
           //Ir al menu de mercaderistas
           this.props.navigation.navigate("MenuMercaderista",{
             datosUsuario:responseJSON[0]
