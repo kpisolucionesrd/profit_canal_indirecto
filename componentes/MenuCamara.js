@@ -43,11 +43,11 @@ export default class MenuCamara extends Component{
         if(GlobalEncuesta!=null && GlobalEncuesta!="null" && GlobalEncuesta!=undefined && GlobalEncuesta!="undefined")
         {
           GlobalEncuesta.push(datosEncuesta) //Agregar objeto fotos
-          await AsyncStorage.setItem("GlobalFotos",await JSON.stringify(GlobalFotos))
+          await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(GlobalFotos))
         }else
         {
           let vectorTemp=[datosEncuesta] //Agregar objeto fotos
-          await AsyncStorage.setItem("GlobalFotos",await JSON.stringify(vectorTemp))
+          await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(vectorTemp))
         }
         //--------------------------------------------------------------------------------------------------
         //Ir al Menu

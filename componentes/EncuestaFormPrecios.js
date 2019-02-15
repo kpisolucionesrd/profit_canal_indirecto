@@ -42,7 +42,7 @@ export default class EncuestaPrecios extends Component{
     })
   };
 
-  completarEncuesta=async()=>{
+  cargarDataLocal=async()=>{
     const { navigation } = this.props;
     const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
     const CantCampos=datosUsuarios.CantCampos;
@@ -68,8 +68,11 @@ export default class EncuestaPrecios extends Component{
       datosAgenda["colmadosFormPrecios"]=colmados;
       await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
 
+      //Guardar Data en el Objeto Datos 
+
+
       //Ir al MenuCamara
-      this.props.navigation.navigate('MenuCamara',{
+      this.props.navigation.navigate('MenuMercaderista',{
         datosUsuarios:datosUsuarios,
         datosEncuesta:objetoDatos
       });
@@ -125,8 +128,8 @@ export default class EncuestaPrecios extends Component{
         {datosUsuarios.cuidadoHogar.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default="***SELECCIONAR***"/>)}
 
         {/*Menu de Procesar*/}
-        <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarEncuesta}/>
-        {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarEncuesta}>Listo</Text>}
+        <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.cargarDataLocal}/>
+        {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.cargarDataLocal}>Listo</Text>}
       </ScrollView>
     )
   } //Cierre del metodo render
