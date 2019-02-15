@@ -43,10 +43,10 @@ export default class Encuesta extends Component{
 
   completarEncuesta=async()=>{
     const { navigation } = this.props;
-    const datosUsuario=navigation.getParam('datosUsuarios','some default value');
+    const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
     let objetoDatos=this.state.objetoDatos;
-    objetoDatos.id=datosUsuario.identificador;
+    objetoDatos.id=datosUsuarios.identificador;
     objetoDatos.encuesta=this.state.objetoEncuesta;
     objetoDatos.tipoEncuesta="Encuesta";
 
@@ -56,7 +56,7 @@ export default class Encuesta extends Component{
     })
 
     //Verificar si los campos fueron completados
-    if(Object.keys(this.state.objetoEncuesta).length>=datosUsuario.cantCampos && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
+    if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCampos && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
 
       //Eliminar el colmado completado de la lista y guardar el vector
       let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
