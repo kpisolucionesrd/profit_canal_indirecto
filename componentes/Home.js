@@ -3,7 +3,6 @@ import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,
 import {Icon} from 'react-native-elements';
 import Logo from '../imagenes/logo_profit.png';
 
-
 export default class Home extends Component{
   constructor(props){
     super(props);
