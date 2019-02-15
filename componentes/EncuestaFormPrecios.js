@@ -45,12 +45,12 @@ export default class EncuestaPrecios extends Component{
   cargarDataLocal=async()=>{
     const { navigation } = this.props;
     const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
-    const CantCampos=datosUsuarios.CantCampos;
 
     let objetoDatos=this.state.objetoDatos;
     objetoDatos.id=datosUsuario.identificador;
     objetoDatos.encuesta=this.state.objetoEncuesta;
     objetoDatos.tipoEncuesta="FormularioPrecios";
+    GlobalEncuestaForm=await JSON.parse(await AsyncStorage.getItem("GlobalEncuestaForm")) //Vector global que guarda todas las encuesta
 
     //Guardar el objeto datos en el statte
     this.setState({
@@ -58,7 +58,8 @@ export default class EncuestaPrecios extends Component{
     })
 
     //Verificar si los campos fueron completados
-    if(Object.keys(this.state.objetoEncuesta).length==CantCampos && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
+    if(Object.keys(objetoDatos).length==datosUsuarios.CantCamposForm && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***")
+    {
 
       //Eliminar el colmado completado de la lista y guardar el vector
       let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
@@ -68,23 +69,33 @@ export default class EncuestaPrecios extends Component{
       datosAgenda["colmadosFormPrecios"]=colmados;
       await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
 
-      //Guardar Data en el Objeto Datos 
-
-
-      //Ir al MenuCamara
-      this.props.navigation.navigate('MenuMercaderista',{
-        datosUsuarios:datosUsuarios,
-        datosEncuesta:objetoDatos
-      });
-
-    }else{
-      if(this.state.objetoEncuesta["colmado"]=="***SELECCIONAR***" || this.state.objetoEncuesta["colmado"]==null){
+      //--------------------------------------------------------------------------------------------------
+      //Proceso GlobalEncuestaForm
+      if(GlobalEncuestaForm!=null && GlobalEncuestaForm!="null" && GlobalEncuestaForm!=undefined && GlobalEncuestaForm!="undefined")
+      {
+        GlobalEncuestaForm.push(objetoDatos) //Agregar objeto fotos
+        await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(GlobalFotos))
+      }
+      else
+      {
+        let vectorTemp=[datosEncuesta] //Agregar objeto fotos
+        await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(vectorTemp))
+      }
+      //--------------------------------------------------------------------------------------------------
+      //Ir al Menu Mercaderista
+      this.props.navigation.navigate('MenuMercaderista');
+    }
+    else
+    {
+      if(this.state.objetoEncuesta["colmado"]=="***SELECCIONAR***" || this.state.objetoEncuesta["colmado"]==null)
+      {
         alert("Favor seleccionar colmado")
-      }else{
+      }
+      else
+      {
         alert("Faltan campos por completar")
       }
     }
-
   };
 
   gettingComboBox=async(valorSeleccionado)=>{
