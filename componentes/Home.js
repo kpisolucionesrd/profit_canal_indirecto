@@ -80,12 +80,12 @@ export default class Home extends Component{
         datosUsuario:datosUsuario
       });
     }
-  }
+  };
 
   //Cadenas de Eventos
   cadenaEventosLOGGING=async()=>{
     await this.CredencialesProcess();
-  }
+  };
 
   render(){
     return(
