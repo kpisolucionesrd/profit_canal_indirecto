@@ -53,7 +53,10 @@ export default class Encuesta extends Component{
     //Guardar el objeto datos en el statte
     this.setState({
       objetoDatos:objetoDatos
-    })
+    });
+
+    //PRUEBA
+    alert(Object.keys(this.state.objetoEncuesta).length+"|"+datosUsuarios.cantCampos)
 
     //Verificar si los campos fueron completados
     if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCampos && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
