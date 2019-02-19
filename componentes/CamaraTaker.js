@@ -43,7 +43,7 @@ export default class CamaraTaker extends Component{
       fotosVector:fotosVector,
       fotosObjeto:fotosObjeto
     });
-  }
+  };
 
   finishCam=async()=>{
     /*Verificar si la cantidad es la correcta*/
@@ -56,7 +56,7 @@ export default class CamaraTaker extends Component{
   }else{
     alert("Debes capturar fotos")
   }
-}
+};
 
   //Cadenas de Eventos
   render(){
@@ -69,7 +69,7 @@ export default class CamaraTaker extends Component{
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'red',fontSize:15}} onPress={this.finishCam}>Listo</Text>}
       </ScrollView>
     )
-  }
+  };
 }
 
 const cameraView=StyleSheet.create({
@@ -88,4 +88,4 @@ const cameraView=StyleSheet.create({
     textAlign:'center',
     marginLeft:'30%'
   }
-})
+});
