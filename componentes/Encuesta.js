@@ -56,7 +56,7 @@ export default class Encuesta extends Component{
     });
 
     //PRUEBA
-    alert(Object.keys(this.state.objetoEncuesta).length+"|"+datosUsuarios.cantCampos)
+    alert(Object.keys(this.state.objetoEncuesta).length.toString()+"|"+datosUsuarios.cantCampos.toString())
 
     //Verificar si los campos fueron completados
     if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCampos && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
