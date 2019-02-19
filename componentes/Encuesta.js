@@ -73,7 +73,7 @@ export default class Encuesta extends Component{
       });
 
     }else{
-      if(this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***" || this.state.objetoEncuesta["colmado"]!=null){
+      if(this.state.objetoEncuesta["colmado"]=="***SELECCIONAR***" || this.state.objetoEncuesta["colmado"]==null){
         alert("Favor seleccionar colmado")
       }else{
         alert("Faltan campos por completar")
