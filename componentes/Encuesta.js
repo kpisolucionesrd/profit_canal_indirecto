@@ -41,7 +41,7 @@ export default class Encuesta extends Component{
     })
   };
 
-  completarEncuesta=async()=>{
+  cargarDataLocal=async()=>{
     const { navigation } = this.props;
     const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
@@ -56,7 +56,7 @@ export default class Encuesta extends Component{
     });
 
     //Verificar si los campos fueron completados
-    if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCampos && this.state.objetoEncuesta["colmado"]!="***SELECCIONAR***"){
+    if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCampos && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***"){
 
       //Eliminar el colmado completado de la lista y guardar el vector
       let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
@@ -159,8 +159,8 @@ export default class Encuesta extends Component{
         {/*COMENTARIOS*/}
         <TextInputComponent identificacion="Comentarios" funcion={this.crearJson} default="***SELECCIONAR***"/>
 
-        <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.completarEncuesta}/>
-        {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.completarEncuesta}>Listo</Text>}
+        <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.cargarDataLocal}/>
+        {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.cargarDataLocal}>Listo</Text>}
       </ScrollView>
     )
   } //Cierre del metodo render
