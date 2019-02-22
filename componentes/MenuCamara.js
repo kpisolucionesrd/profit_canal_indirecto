@@ -22,7 +22,7 @@ export default class MenuCamara extends Component{
     const fotosObjeto=navigation.getParam('fotosObjeto','NA');
     this.setState({disableButton:true});
     try {
-      //Guardar las imagenes y encuesta en el TERMINAL
+      //Guardar las imagenes y encuesta en el TERMINAL (SMARTPHONE)
       if(fotosObjeto[datosEncuesta.encuesta["colmado"]+"__"+datosEncuesta.id].length>2){
         GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")) //Vector global que guarda todas las fotos por colmado
         GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")) //Vector global que guarda todas las encuesta
@@ -33,7 +33,8 @@ export default class MenuCamara extends Component{
         {
           GlobalFotos.push(fotosObjeto) //Agregar objeto fotos
           await AsyncStorage.setItem("GlobalFotos",await JSON.stringify(GlobalFotos))
-        }else
+        }
+        else
         {
           let vectorTemp=[fotosObjeto] //Agregar objeto fotos
           await AsyncStorage.setItem("GlobalFotos",await JSON.stringify(vectorTemp))
@@ -44,7 +45,8 @@ export default class MenuCamara extends Component{
         {
           GlobalEncuesta.push(datosEncuesta) //Agregar objeto fotos
           await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(GlobalFotos))
-        }else
+        }
+        else
         {
           let vectorTemp=[datosEncuesta] //Agregar objeto fotos
           await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(vectorTemp))
@@ -52,7 +54,10 @@ export default class MenuCamara extends Component{
         //--------------------------------------------------------------------------------------------------
         //Ir al Menu
         this.props.navigation.navigate('MenuMercaderista');
-      }else{
+        alert("La Data se guardo Exitosamente en el Dispositivo");
+      }
+      else
+      {
         alert("La cantidad de fotos debe ser mayor a 2");
       }
   }catch(e)
