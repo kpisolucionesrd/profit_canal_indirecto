@@ -54,6 +54,20 @@ export default class MenuMercaderista extends Component{
 
   estadisticas(){};
 
+  cargarDataServidor()=>{
+    """ Esta Funcion se utiliza para Cargar la al servidor.
+    """
+    //--------------------------------------------------------------------------------------------
+                                /*DATOS ENCUESTA COLMADO*/
+    GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")) //Vector global que guarda todas las fotos por colmado
+    GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")) //Vector global que guarda todas las encuesta
+                                /*DATOS FORMULARIO PRECIO*/
+
+    //--------------------------------------------------------------------------------------------
+
+
+  };
+
   mostrarData=async()=>{
     GlobalEncuesta=await AsyncStorage.getItem("GlobalEncuesta") //Vector global que guarda todas las encuesta
     alert(GlobalEncuesta)
