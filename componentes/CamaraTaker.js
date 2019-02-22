@@ -50,7 +50,8 @@ export default class CamaraTaker extends Component{
     const { navigation } = this.props;
     if(await this.state.fotosVector.length>0){
     this.props.navigation.navigate('MenuCamara',{
-      fotosObjeto:this.state.fotosObjeto
+      fotosObjeto:this.state.fotosObjeto,
+      fotosVector:this.state.fotosVector
     });
     alert("Foto capturada exitosamente!!");
   }else{

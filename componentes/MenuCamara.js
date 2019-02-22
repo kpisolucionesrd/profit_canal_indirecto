@@ -91,7 +91,7 @@ export default class MenuCamara extends Component{
     const { navigation } = this.props;
     const datosUsuarios=navigation.getParam('datosUsuarios');
     const datosEncuesta=navigation.getParam('datosEncuesta');
-    const fotos=navigation.getParam('fotos',null);
+    const fotos=navigation.getParam('fotosVector',null);
 
     return(
       <ScrollView style={iniciar_seccion_styles.main}>
