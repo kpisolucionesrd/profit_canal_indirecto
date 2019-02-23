@@ -20,12 +20,13 @@ export default class MenuCamara extends Component{
     const { navigation } = this.props;
     const datosEncuesta=navigation.getParam('datosEncuesta');
     const fotosObjeto=navigation.getParam('fotosObjeto','NA');
-    this.setState({disableButton:true});
+
     try {
       //Guardar las imagenes y encuesta en el TERMINAL (SMARTPHONE)
       if(fotosObjeto[datosEncuesta.encuesta["colmado"]+"__"+datosEncuesta.id].length>2){
-        GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")) //Vector global que guarda todas las fotos por colmado
-        GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")) //Vector global que guarda todas las encuesta
+        this.setState({disableButton:true});
+        GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")); //Vector global que guarda todas las fotos por colmado
+        GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")); //Vector global que guarda todas las encuesta
 
         //--------------------------------------------------------------------------------------------------
         //Proceso GlobalFotos

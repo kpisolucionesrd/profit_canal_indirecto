@@ -45,7 +45,7 @@ export default class Encuesta extends Component{
     const { navigation } = this.props;
     const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
-    let objetoDatos=this.state.objetoDatos;
+    let objetoDatos=await this.state.objetoDatos;
     objetoDatos.id=datosUsuarios.identificador;
     objetoDatos.encuesta=this.state.objetoEncuesta;
     objetoDatos.tipoEncuesta="Encuesta";
@@ -54,6 +54,9 @@ export default class Encuesta extends Component{
     this.setState({
       objetoDatos:objetoDatos
     });
+
+    //PRUEBA
+    alert(objetoDatos.encuesta["colmado"])
 
     //Verificar si los campos fueron completados
     if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCampos && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***"){
@@ -73,7 +76,7 @@ export default class Encuesta extends Component{
       });
 
     }else{
-      if(this.state.objetoEncuesta["colmado"]=="***SELECCIONAR***" || this.state.objetoEncuesta["colmado"]==null){
+      if(objetoDatos.encuesta["colmado"]=="***SELECCIONAR***" || objetoDatos.encuesta["colmado"]==null){
         alert("Favor seleccionar colmado")
       }else{
         alert("Faltan campos por completar")
@@ -117,19 +120,16 @@ export default class Encuesta extends Component{
         <Text style={iniciar_seccion_styles.secciones}>DISPOSICION DEL COLMADERO</Text>
         {datosUsuarios.dispColmaderoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
-        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Disposicion Colmadero</Text>
         <ComboBox identificacion="Disposicion Colmadero" datos={datosUsuarios.dispColmadero} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Tipo de Acceso al Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO DE ACCESO AL COLMADO</Text>
 
-        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Acceso Colmado</Text>
         <ComboBox identificacion="Acceso Colmado" datos={datosUsuarios.tipoAccesoColmado} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Tamaño del Colmado*/}
         <Text style={iniciar_seccion_styles.secciones}>TAMAñO DEL COLMADO</Text>
 
-        <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Tamano del Colmado</Text>
         <ComboBox identificacion="Tamano Colmado" datos={datosUsuarios.tamanoColmado} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
         {/*Capacidad del Colmado*/}
