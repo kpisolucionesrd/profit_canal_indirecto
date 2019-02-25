@@ -47,7 +47,7 @@ export default class EncuestaPrecios extends Component{
     const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
     let objetoDatos=await this.state.objetoDatos;
-    objetoDatos.id=datosUsuario.identificador;
+    objetoDatos.id=datosUsuarios.identificador;
     objetoDatos.encuesta=this.state.objetoEncuesta;
     objetoDatos.tipoEncuesta="FormularioPrecios";
     GlobalEncuestaForm=await JSON.parse(await AsyncStorage.getItem("GlobalEncuestaForm")) //Vector global que guarda todas las encuesta
