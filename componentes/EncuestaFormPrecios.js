@@ -44,7 +44,7 @@ export default class EncuestaPrecios extends Component{
 
   cargarDataLocal=async()=>{
     const { navigation } = this.props;
-    const datosUsuarios=navigation.getParam('datosUsuario','some default value');
+    const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
     let objetoDatos=await this.state.objetoDatos;
     objetoDatos.id=datosUsuarios.identificador;
@@ -66,7 +66,7 @@ export default class EncuestaPrecios extends Component{
         //Eliminar el colmado completado de la lista y guardar el vector
         let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
         let colmados=datosAgenda["colmadosFormPrecios"];
-        indiceEliminar=colmados.indexOf(this.state.colmado)
+        indiceEliminar=colmados.indexOf(this.state.colmado);
         colmados.splice(indiceEliminar,1); //Eliminar
         datosAgenda["colmadosFormPrecios"]=colmados;
         await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
@@ -123,7 +123,7 @@ export default class EncuestaPrecios extends Component{
   render(){
     const { navigation } = this.props;
     const colmados=navigation.getParam('colmados','some default value');
-    const datosUsuarios=navigation.getParam('datosUsuario','some default value');
+    const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
     return(
       <ScrollView style={iniciar_seccion_styles.main}>
