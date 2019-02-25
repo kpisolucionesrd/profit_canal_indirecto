@@ -76,14 +76,14 @@ export default class MenuMercaderista extends Component{
     }
     else
     {
-      cantPendingEncuesta==GlobalEncuesta.length
+      cantPendingEncuesta==GlobalEncuesta.length-1
     }
     if(GlobalEncuestaForm==null){
       cantPendingEncuesta=0
     }
     else
     {
-      cantPendingFormPrecios=GlobalEncuestaForm.length
+      cantPendingFormPrecios=GlobalEncuestaForm.length-1
     }
 
     //Ir a la encuesta
