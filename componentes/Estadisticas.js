@@ -15,6 +15,7 @@ export default class Estadisticas extends Component{
   //Cadenas de Eventos
   render(){
     const { navigation } = this.props;
+    const Fecha=new Date();
     colmadosEncuesta=navigation.getParam("colmadosEstadisticas","NA")
     colmadosPrecios=navigation.getParam("colmadosFormPrecios","NA")
     cantPendingEncuesta=navigation.getParam("cantPendingEncuesta","NA")
@@ -27,6 +28,7 @@ export default class Estadisticas extends Component{
         <Text style={{color:'black',fontWeight:'bold'}}>Pendientes de Enviar Servidor Formulario Precios: {cantPendingFormPrecios}</Text>
         <Text style={{color:'black',fontWeight:'bold'}}>Enviados al Servidor Encuesta Colmado</Text>
         <Text style={{color:'black',fontWeight:'bold'}}>Enviados al Servidor Formulario Precios</Text>
+        <Text style={{color:'black',fontWeight:'bold'}}>{Fecha.toDateString()}</Text>
       </ScrollView>
     );
   } //Cierre del metodo render
