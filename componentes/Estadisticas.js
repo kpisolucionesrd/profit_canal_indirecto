@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {WebView} from 'react-native';
+import {WebView,ScrollView,Text} from 'react-native';
 
 export default class Estadisticas extends Component{
   constructor(props){
@@ -11,15 +11,27 @@ export default class Estadisticas extends Component{
   };
 
   //Eventos
+  actualizarDatos=async()=>{
+    /*Esta funcion se utiliza para actuzaliar el valor de Cant. Pendientes por subir al servidor*/
+
+  }
 
   //Cadenas de Eventos
   render(){
+    const { navigation } = this.props;
+    colmadosEncuesta=navigation.getParam("colmadosEstadisticas","NA")
+    colmadosPrecios=navigation.getParam("colmadosFormPrecios","NA")
+    cantPendingEncuesta=navigation.getParam("cantPendingEncuesta","NA")
+    cantPendingFormPrecios=navigation.getParam("cantPendingFormPrecios","NA")
     return(
-      <WebView
-        source={{uri: 'https://github.com/facebook/react-native'}}
-        style={{marginTop: 20}}
-      />
+      <ScrollView>
+        <Text>Pendientes de Completar Encuesta Colmado: {colmadosEncuesta.length}</Text>
+        <Text>Pendientes de Completar Formulario Precios: {colmadosPrecios.length}</Text>
+        <Text>Pendientes de Enviar Servidor Encuesta Colmado: {cantPendingEncuesta}</Text>
+        <Text>Pendientes de Enviar Servidor Formulario Precios: {cantPendingFormPrecios}</Text>
+        <Text>Enviados al Servidor Encuesta Colmado</Text>
+        <Text>Enviados al Servidor Formulario Precios</Text>
+      </ScrollView>
     );
   } //Cierre del metodo render
-
 } //Cierre de la clase

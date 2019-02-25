@@ -52,7 +52,49 @@ export default class MenuMercaderista extends Component{
     })
   };
 
-  estadisticas(){};
+  estadisticas(){
+    /*Esta función se utiliza para ir al menu de estadistica*/
+    const { navigation } = this.props;
+    const datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario")); /*Aqui se encuentra los datos/campo para Encuesta*/
+
+    //Colmados Estadisticas
+    colmadosEstadisticas=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"]
+
+    //Colmados Formulario Precios
+    colmadosFormPrecios=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmadosFormPrecios"]
+
+    //Pendientes enviar servicor Encuesta Colmados
+    GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")); //Vector global que guarda todas las encuesta
+
+    //Pendientes enviar servicor Formularios de Precios
+    GlobalEncuestaForm=await JSON.parse(await AsyncStorage.getItem("GlobalEncuestaForm")); //Vector global que guarda todas las encuesta
+
+    //Evaluaciones
+    if(GlobalEncuesta==null)
+    {
+      cantPendingEncuesta=0
+    }
+    else
+    {
+      cantPendingEncuesta==GlobalEncuesta.length
+    }
+    if(GlobalEncuestaForm==null){
+      cantPendingEncuesta=0
+    }
+    else
+    {
+      cantPendingFormPrecios=GlobalEncuestaForm.length
+    }
+
+    //Ir a la encuesta
+    this.props.navigation.navigate('Estadisticas',{
+      colmadosEstadisticas:colmadosEstadisticas,
+      colmadosFormPrecios:colmadosFormPrecios,
+      cantPendingEncuesta:cantPendingEncuesta,
+      cantPendingFormPrecios:cantPendingFormPrecios
+    });
+
+  };
 
   funcionCargarEncuesta=async(objetoEncuesta)=>{
     /*
