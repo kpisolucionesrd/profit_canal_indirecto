@@ -57,11 +57,11 @@ export default class MenuMercaderista extends Component{
     const { navigation } = this.props;
     const datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario")); /*Aqui se encuentra los datos/campo para Encuesta*/
     try {
-      //Colmados Estadisticas
-      colmadosEstadisticas=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"]
+      //Colmados Estadisticas: Cantidad de colmados pendientes Encuesta Colmados
+      colmPendientesEncuesta=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmados"]
 
-      //Colmados Formulario Precios
-      colmadosFormPrecios=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmadosFormPrecios"]
+      //Colmados Formulario Precios: Cantidad de colmados pendientes Formulario de precios
+      colmPendientesFormPrecios=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmadosFormPrecios"]
 
       //Pendientes enviar servicor Encuesta Colmados
       GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")); //Vector global que guarda todas las encuesta
@@ -76,20 +76,22 @@ export default class MenuMercaderista extends Component{
       }
       else
       {
-        cantPendingEncuesta==GlobalEncuesta.length-1
+        cantPendingEncuesta==GlobalEncuesta.length
       }
-      if(GlobalEncuestaForm==null){
+
+      if(GlobalEncuestaForm==null)
+      {
         cantPendingFormPrecios=0
       }
       else
       {
-        cantPendingFormPrecios=GlobalEncuestaForm.length-1
+        cantPendingFormPrecios=GlobalEncuestaForm.length
       }
 
       //Ir a la encuesta
       this.props.navigation.navigate('Estadisticas',{
-        colmadosEstadisticas:colmadosEstadisticas.length,
-        colmadosFormPrecios:colmadosFormPrecios.length,
+        colmadosEstadisticas:colmPendientesEncuesta.length-1,
+        colmadosFormPrecios:colmPendientesFormPrecios.length-1,
         cantPendingEncuesta:cantPendingEncuesta,
         cantPendingFormPrecios:cantPendingFormPrecios
       });
