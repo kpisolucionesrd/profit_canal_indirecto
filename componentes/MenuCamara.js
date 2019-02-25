@@ -67,30 +67,30 @@ export default class MenuCamara extends Component{
   }
 };
 
-  cargarIMG=async(imagenURI,index,vector)=>{
-    /* Esta funcion se utiliza para enviar las imagenes al servidor*/
-    const {navigation}=this.props;
-    const puntoVenta=navigation.getParam('puntoVenta','NA');
-    try {
-      const h = {}; //headers
-      h.Accept = 'application/json';
-      let formData=new FormData();
-      await formData.append("foto_colmados",{uri:imagenURI,name:"FlashTeam-"+puntoVenta+".jpg",type:'image/jpg'})
-      await fetch("http://167.99.167.145/api/profit_insertar_imagenes",{
-        method:'POST',
-        headers:h,
-        body:formData
-      });
-      if(index==vector.length-1){
-        this.setState({disableButton:false});
-        alert("Enviados al servidor CORRECTAMENTE")
-        this.props.navigation.goBack(); //Navegar
-      }
+  cargarIMGServidor=async(imagenURI,index,vector)=>{
+  /* Esta funcion se utiliza para enviar las imagenes al servidor*/
+  const {navigation}=this.props;
+  const puntoVenta=navigation.getParam('puntoVenta','NA');
+  try {
+    const h = {}; //headers
+    h.Accept = 'application/json';
+    let formData=new FormData();
+    await formData.append("foto_colmados",{uri:imagenURI,name:"FlashTeam-"+puntoVenta+".jpg",type:'image/jpg'})
+    await fetch("http://167.99.167.145/api/profit_insertar_imagenes",{
+      method:'POST',
+      headers:h,
+      body:formData
+    });
+    if(index==vector.length-1){
+      this.setState({disableButton:false});
+      alert("Enviados al servidor CORRECTAMENTE")
+      this.props.navigation.goBack(); //Navegar
     }
-    catch (e) {
-      alert(e)
-    }
-  };
+  }
+  catch (e) {
+    alert(e)
+  }
+};
 
   //Cadenas de Eventos
   render(){
@@ -116,7 +116,7 @@ export default class MenuCamara extends Component{
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15}} onPress={this.cargarDataLocal}>Listo</Text>}
       </ScrollView>
     )
-  }
+  };
 }
 
 const iniciar_seccion_styles=StyleSheet.create({

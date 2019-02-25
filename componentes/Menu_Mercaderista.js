@@ -82,6 +82,26 @@ export default class MenuMercaderista extends Component{
 
   };
 
+  funcionCargarIMG=async(nombreColmado,objetoImg)=>{
+    /* Esta funcion se utiliza para enviar las imagenes al servidor*/
+    const {navigation}=this.props;
+    const puntoVenta=navigation.getParam('puntoVenta','NA');
+    try {
+      const h = {}; //headers
+      h.Accept = 'application/json';
+      let formData=new FormData();
+      await formData.append("foto_colmados",{uri:objetoImg,name:nombreColmado+".jpg",type:'image/jpg'})
+      await fetch("http://167.99.167.145/api/profit_insertar_imagenes",{
+        method:'POST',
+        headers:h,
+        body:formData
+      });
+    }
+    catch (e) {
+      alert(e)
+    }
+  };
+
   cargarDataServidor=async()=>{
     /*
       Esta Funcion se utiliza para Cargar la al servidor.
@@ -92,22 +112,60 @@ export default class MenuMercaderista extends Component{
     GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")) //Vector global que guarda todas las encuesta
 
                                 /*DATOS FORMULARIO PRECIO*/
+    GlobalEncuestaForm=await JSON.parse(await AsyncStorage.getItem("GlobalEncuestaForm")) //Vector global que guarda todas las encuesta
     //--------------------------------------------------------------------------------------------
                                 /*CARGAR DATOS AL SERVIDOR*/
+
     /*CARGAR ENCUESTAS*/
     try {
-      let vectorVerdad=await GlobalEncuesta.map(this.funcionCargarEncuesta);
-    } catch (e) {
-        alert("Error al cargar la data...intente de nuevo-->"+e)
+      if(GlobalEncuesta!=null)
+      {
+        let vecVerdadEncuesta=await GlobalEncuesta.map(this.funcionCargarEncuesta);
+      }
+
+      if(GlobalEncuestaForm!=null)
+      {
+        let vectorVerdadForm=await  GlobalEncuestaForm.map(this.funcionCargarEncuesta);
+      }
+
+      if(GlobalEncuesta==null && GlobalEncuestaForm==null)
+      {
+        alert(GlobalEncuesta)
+        alert("No Existe Data para cargar al servidor")
+      }
+      else
+      {
+        alert(GlobalEncuesta)
+        alert("Data Cargada al Servidor Correctamente")
+      }
     }
+    catch (e)
+    {
+      alert("Error al cargar la data...intente de nuevo-->"+e)
+    }
+    //--------------------------------------------------------------------------------------------
+                                /*CARGAR FOTOS AL SERVIDOR*/
+    try {
+      if(GlobalFotos!=null || GlobalFotos!="null")
+      {
+        GlobalFotos.forEach(async(objectFotos)=>{
+          let nombreColmado=await Object.keys(objectFotos);
+          objectFotos[nombreColmado].forEach(x=>this.funcionCargarIMG(nombreColmado,x));
+        });
+      }
+    } catch (e) {
+      alert("Error al cargar las imagenes..."+e)
+    }
+
   };
 
+  //PRUEBA_MOSTRAR
   mostrarData=async()=>{
-    GlobalEncuesta=await AsyncStorage.getItem("GlobalEncuesta") //Vector global que guarda todas las encuesta
-    alert(GlobalEncuesta)
+    GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")); //Vector global que guarda todas las fotos por colmado
+    alert(GlobalFotos)
   };
 
-  cargarServidor(){};
+
   //Cadenas de Eventos
   render(){
     const { navigation } = this.props;

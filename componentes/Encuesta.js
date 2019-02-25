@@ -5,6 +5,7 @@ import ComboBox from './ElementosCompactos/ComboBox.js';
 import TextInputComponent from './ElementosCompactos/textInput.js';
 import {Icon,Button} from 'react-native-elements';
 
+
 export default class Encuesta extends Component{
   constructor(props){
     super(props);
@@ -18,7 +19,7 @@ export default class Encuesta extends Component{
         fechaInserccion:null
       },
       objetoEncuesta:{}
-    }
+    };
     //Funciones
   };
 
@@ -55,8 +56,6 @@ export default class Encuesta extends Component{
       objetoDatos:objetoDatos
     });
 
-    //PRUEBA
-    alert(objetoDatos.encuesta["colmado"])
 
     //Verificar si los campos fueron completados
     if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCampos && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***"){
@@ -88,12 +87,12 @@ export default class Encuesta extends Component{
   gettingComboBox=async(valorSeleccionado)=>{
 
     //Obtener el Json del constructor
-    let objetoDatos=this.state.objetoDatos;
-    objetoDatos.encuesta["colmado"]=valorSeleccionado
+    let objetoDatos=this.state.objetoEncuesta;
+    objetoDatos["colmado"]=valorSeleccionado
 
     /*Guardar objeto*/
     this.setState({
-      objetoDatos:objetoDatos,
+      objetoEncuesta:objetoDatos,
       colmado:valorSeleccionado
     });
   };

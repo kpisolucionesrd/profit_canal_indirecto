@@ -19,7 +19,7 @@ export default class EncuestaPrecios extends Component{
         fechaInserccion:null
       },
       objetoEncuesta:{}
-    }
+    };
     //Funciones
   };
 
@@ -46,7 +46,7 @@ export default class EncuestaPrecios extends Component{
     const { navigation } = this.props;
     const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
-    let objetoDatos=this.state.objetoDatos;
+    let objetoDatos=await this.state.objetoDatos;
     objetoDatos.id=datosUsuario.identificador;
     objetoDatos.encuesta=this.state.objetoEncuesta;
     objetoDatos.tipoEncuesta="FormularioPrecios";
@@ -55,57 +55,65 @@ export default class EncuestaPrecios extends Component{
     //Guardar el objeto datos en el statte
     this.setState({
       objetoDatos:objetoDatos
-    })
+    });
 
     //Verificar si los campos fueron completados
-    if(Object.keys(objetoDatos).length>=datosUsuarios.CantCamposForm && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***")
+    try
     {
-      //Eliminar el colmado completado de la lista y guardar el vector
-      let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
-      let colmados=datosAgenda["colmadosFormPrecios"];
-      indiceEliminar=colmados.indexOf(this.state.colmado)
-      colmados.splice(indiceEliminar,1); //Eliminar
-      datosAgenda["colmadosFormPrecios"]=colmados;
-      await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
+      if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.CantCamposForm && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***")
+      {
+        //Eliminar el colmado completado de la lista y guardar el vector
+        let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
+        let colmados=datosAgenda["colmadosFormPrecios"];
+        indiceEliminar=colmados.indexOf(this.state.colmado)
+        colmados.splice(indiceEliminar,1); //Eliminar
+        datosAgenda["colmadosFormPrecios"]=colmados;
+        await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
 
-      //--------------------------------------------------------------------------------------------------
-      //Proceso GlobalEncuestaForm
-      if(GlobalEncuestaForm!=null && GlobalEncuestaForm!="null" && GlobalEncuestaForm!=undefined && GlobalEncuestaForm!="undefined")
-      {
-        GlobalEncuestaForm.push(objetoDatos) //Agregar objeto fotos
-        await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(GlobalFotos))
+        //--------------------------------------------------------------------------------------------------
+        //Proceso GlobalEncuestaForm
+        if(GlobalEncuestaForm!=null && GlobalEncuestaForm!="null" && GlobalEncuestaForm!=undefined && GlobalEncuestaForm!="undefined")
+        {
+          GlobalEncuestaForm.push(objetoDatos) //Agregar objeto fotos
+          await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(GlobalFotos))
+        }
+        else
+        {
+          let vectorTemp=[datosEncuesta] //Agregar objeto fotos
+          await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(vectorTemp));
+        }
+        //--------------------------------------------------------------------------------------------------
+        //Ir al Menu Mercaderista
+        this.props.navigation.navigate('MenuMercaderista');
+        alert("La Data se guardo Exitosamente en el Dispositivo");
       }
       else
       {
-        let vectorTemp=[datosEncuesta] //Agregar objeto fotos
-        await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(vectorTemp))
+        if(this.state.objetoEncuesta["colmado"]=="***SELECCIONAR***" || this.state.objetoEncuesta["colmado"]==null)
+        {
+          alert("Favor seleccionar colmado")
+        }
+        else
+        {
+          alert("Faltan campos por completar")
+        }
       }
-      //--------------------------------------------------------------------------------------------------
-      //Ir al Menu Mercaderista
-      this.props.navigation.navigate('MenuMercaderista');
     }
-    else
+    catch (e)
     {
-      if(this.state.objetoEncuesta["colmado"]=="***SELECCIONAR***" || this.state.objetoEncuesta["colmado"]==null)
-      {
-        alert("Favor seleccionar colmado")
-      }
-      else
-      {
-        alert("Faltan campos por completar")
-      }
+      alert("Error al tratar de cargar la data al dispositivo (Celular)")
     }
   };
 
   gettingComboBox=async(valorSeleccionado)=>{
 
     //Obtener el Json del constructor
-    let objetoDatos=this.state.objetoDatos;
-    objetoDatos.encuesta["colmado"]=valorSeleccionado
+    let objetoDatos=this.state.objetoEncuesta;
+    objetoDatos["colmado"]=valorSeleccionado
 
     /*Guardar objeto*/
     this.setState({
-      objetoDatos:objetoDatos,
+      objetoEncuesta:objetoDatos,
       colmado:valorSeleccionado
     });
   };
@@ -127,22 +135,22 @@ export default class EncuestaPrecios extends Component{
 
         {/*Cuidado Oral*/}
         <Text style={iniciar_seccion_styles.secciones}>CUIDADO ORAL</Text>
-        {datosUsuarios.cuidadoOral.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default="***SELECCIONAR***"/>)}
+        {datosUsuarios.cuidadoOral.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default=""/>)}
 
         {/*Cuidado Personal*/}
         <Text style={iniciar_seccion_styles.secciones}>CUIDADO PERSONAL</Text>
-        {datosUsuarios.cuidadoPersonal.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default="***SELECCIONAR***"/>)}
+        {datosUsuarios.cuidadoPersonal.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default=""/>)}
 
         {/*Cuidado Hogal*/}
         <Text style={iniciar_seccion_styles.secciones}>CUIDADO HOGAR</Text>
-        {datosUsuarios.cuidadoHogar.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default="***SELECCIONAR***"/>)}
+        {datosUsuarios.cuidadoHogar.map((campo)=><TextBoxInputCustomNumber identificacion={campo} funcion={this.crearJson} default=""/>)}
 
         {/*Menu de Procesar*/}
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300}} size={40} onPress={this.cargarDataLocal}/>
         {this.state.disableButton ? null:<Text style={{marginLeft:300,color:'white',fontSize:15,marginBottom:15}} onPress={this.cargarDataLocal}>Listo</Text>}
       </ScrollView>
     )
-  } //Cierre del metodo render
+  }; //Cierre del metodo render
 
 } //Cierre de la clase
 
