@@ -52,7 +52,7 @@ export default class MenuMercaderista extends Component{
     })
   };
 
-  estadisticas(){
+  estadisticas=async()=>{
     /*Esta función se utiliza para ir al menu de estadistica*/
     const { navigation } = this.props;
     const datosUsuarios=JSON.parse(await AsyncStorage.getItem("datosUsuario")); /*Aqui se encuentra los datos/campo para Encuesta*/
@@ -217,7 +217,7 @@ export default class MenuMercaderista extends Component{
         <Button icon={{name:'list',type:'entypo'}} title='Formulario Precios'onPress={this.encuestaPrecios.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button icon={{name:'list',type:'entypo'}} title='Reiniciar Aplicacion'onPress={this.reiniciarAplicacion.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button icon={{name:'list',type:'entypo'}} title='Cargar Data Al Servidor'onPress={this.cargarDataServidor.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button icon={{name:'list',type:'entypo'}} title='Estadisticas'onPress={this.estadisticas.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
+        <Button icon={{name:'list',type:'entypo'}} title='Estadisticas'onPress={this.estadisticas} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button icon={{name:'list',type:'entypo'}} title='PRUEBA_MOSTRAR DATOS'onPress={this.mostrarData} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
 
         <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Feb-01</Text>
