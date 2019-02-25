@@ -31,7 +31,7 @@ export default class EncuestaPrecios extends Component{
   crearJson=async(idCampo,nuevo_resultado)=>{
     //Proceso para crear el JSON con los datos de la encuesta
     const { navigation } = this.props;
-    const datosUsuario=navigation.getParam('datosUsuario','some default value');
+    const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
 
     let objetoDatos=this.state.objetoEncuesta; //Obtener el Json del constructor
     objetoDatos[idCampo]=nuevo_resultado
