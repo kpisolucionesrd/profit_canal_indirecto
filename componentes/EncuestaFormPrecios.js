@@ -80,7 +80,7 @@ export default class EncuestaPrecios extends Component{
         }
         else
         {
-          let vectorTemp=[datosEncuesta] //Agregar objeto fotos
+          let vectorTemp=[objetoDatos] //Agregar objeto fotos
           await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(vectorTemp));
         }
         //--------------------------------------------------------------------------------------------------
