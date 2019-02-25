@@ -60,7 +60,7 @@ export default class EncuestaPrecios extends Component{
     //Verificar si los campos fueron completados
     try
     {
-      if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.CantCamposForm && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***")
+      if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCamposForm && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***")
       {
 
         //Eliminar el colmado completado de la lista y guardar el vector
@@ -96,8 +96,7 @@ export default class EncuestaPrecios extends Component{
         }
         else
         {
-          //alert("Faltan campos por completar "+Object.keys(this.state.objetoEncuesta).length+" "+datosUsuarios.CantCamposForm)
-          alert(JSON.stringify(datosUsuarios))
+          alert("Faltan campos por completar "+Object.keys(this.state.objetoEncuesta).length+" "+datosUsuarios.CantCamposForm)
         }
       }
     }
