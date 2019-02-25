@@ -130,12 +130,10 @@ export default class MenuMercaderista extends Component{
 
       if(GlobalEncuesta==null && GlobalEncuestaForm==null)
       {
-        alert(GlobalEncuesta)
         alert("No Existe Data para cargar al servidor")
       }
       else
       {
-        alert(GlobalEncuesta)
         alert("Data Cargada al Servidor Correctamente")
       }
     }
@@ -146,7 +144,7 @@ export default class MenuMercaderista extends Component{
     //--------------------------------------------------------------------------------------------
                                 /*CARGAR FOTOS AL SERVIDOR*/
     try {
-      if(GlobalFotos!=null || GlobalFotos!="null")
+      if(GlobalFotos!=null)
       {
         GlobalFotos.forEach(async(objectFotos)=>{
           let nombreColmado=await Object.keys(objectFotos);
