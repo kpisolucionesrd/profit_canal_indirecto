@@ -88,12 +88,19 @@ export default class MenuMercaderista extends Component{
         cantPendingFormPrecios=GlobalEncuestaForm.length
       }
 
+      //Consulta al servidor
+      respuesta=await fetch("http://167.99.167.145/api/profit_usuarios/"+datosUsuarios.identificador);
+      respuestaJSON=await respuesta.json();
+
+
       //Ir a la encuesta
       this.props.navigation.navigate('Estadisticas',{
         colmadosEstadisticas:colmPendientesEncuesta.length-1,
         colmadosFormPrecios:colmPendientesFormPrecios.length-1,
         cantPendingEncuesta:cantPendingEncuesta,
-        cantPendingFormPrecios:cantPendingFormPrecios
+        cantPendingFormPrecios:cantPendingFormPrecios,
+        cantEncuestaServidor:respuestaJSON[0]["EncuestaColmado"],
+        cantFormPrecio:respuestaJSON[0]["FormularioPrecios"],
       });
     }
     catch (e)

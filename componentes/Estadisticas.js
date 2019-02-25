@@ -20,14 +20,16 @@ export default class Estadisticas extends Component{
     colmadosPrecios=navigation.getParam("colmadosFormPrecios","NA")
     cantPendingEncuesta=navigation.getParam("cantPendingEncuesta","NA")
     cantPendingFormPrecios=navigation.getParam("cantPendingFormPrecios","NA")
+    encColmados=navigation.getParam("cantEncuestaServidor","NA")
+    encFormPrecios=navigation.getParam("cantFormPrecio","NA")
     return(
       <ScrollView>
         <Text style={{color:'black',fontWeight:'bold'}}>Pendientes de Completar Encuesta Colmado: {colmadosEncuesta}</Text>
         <Text style={{color:'black',fontWeight:'bold'}}>Pendientes de Completar Formulario Precios: {colmadosPrecios}</Text>
         <Text style={{color:'black',fontWeight:'bold'}}>Pendientes de Enviar Servidor Encuesta Colmado: {cantPendingEncuesta}</Text>
         <Text style={{color:'black',fontWeight:'bold'}}>Pendientes de Enviar Servidor Formulario Precios: {cantPendingFormPrecios}</Text>
-        <Text style={{color:'black',fontWeight:'bold'}}>Enviados al Servidor Encuesta Colmado</Text>
-        <Text style={{color:'black',fontWeight:'bold'}}>Enviados al Servidor Formulario Precios</Text>
+        <Text style={{color:'black',fontWeight:'bold'}}>Enviados al Servidor Encuesta Colmado: {encColmados}</Text>
+        <Text style={{color:'black',fontWeight:'bold'}}>Enviados al Servidor Formulario Precios: {encFormPrecios}</Text>
         <Text style={{color:'black',fontWeight:'bold'}}>{Fecha.toDateString()}</Text>
       </ScrollView>
     );
