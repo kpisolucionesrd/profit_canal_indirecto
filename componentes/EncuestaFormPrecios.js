@@ -102,7 +102,7 @@ export default class EncuestaPrecios extends Component{
     }
     catch (e)
     {
-      alert("Error al tratar de cargar la data al dispositivo (Celular)")
+      alert("Error al tratar de cargar la data al dispositivo (Celular)"+e)
     }
   };
 
