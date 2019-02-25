@@ -62,8 +62,9 @@ export default class EncuestaPrecios extends Component{
     {
       if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.CantCamposForm && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***")
       {
+        //PRUEBA
         alert(Object.keys(this.state.objetoEncuesta).length)
-        
+
         //Eliminar el colmado completado de la lista y guardar el vector
         let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
         let colmados=datosAgenda["colmadosFormPrecios"];
