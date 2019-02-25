@@ -44,7 +44,7 @@ export default class EncuestaPrecios extends Component{
 
   cargarDataLocal=async()=>{
     const { navigation } = this.props;
-    const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
+    const datosUsuarios=navigation.getParam('datosUsuario','some default value');
 
     let objetoDatos=await this.state.objetoDatos;
     objetoDatos.id=datosUsuarios.identificador;
@@ -123,7 +123,7 @@ export default class EncuestaPrecios extends Component{
   render(){
     const { navigation } = this.props;
     const colmados=navigation.getParam('colmados','some default value');
-    const datosUsuarios=navigation.getParam('datosUsuarios','some default value');
+    const datosUsuarios=navigation.getParam('datosUsuario','some default value');
 
     return(
       <ScrollView style={iniciar_seccion_styles.main}>
