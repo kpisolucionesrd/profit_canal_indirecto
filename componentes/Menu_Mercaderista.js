@@ -92,7 +92,6 @@ export default class MenuMercaderista extends Component{
       respuesta=await fetch("http://167.99.167.145/api/profit_usuarios/"+datosUsuarios.identificador);
       respuestaJSON=await respuesta.json();
 
-
       //Ir a la encuesta
       this.props.navigation.navigate('Estadisticas',{
         colmadosEstadisticas:colmPendientesEncuesta.length-1,
