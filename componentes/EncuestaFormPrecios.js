@@ -96,7 +96,7 @@ export default class EncuestaPrecios extends Component{
         }
         else
         {
-          alert("Faltan campos por completar"+Object.keys(this.state.objetoEncuesta).length)
+          alert("Faltan campos por completar "+Object.keys(this.state.objetoEncuesta).length+" "+datosUsuarios.CantCamposForm)
         }
       }
     }
