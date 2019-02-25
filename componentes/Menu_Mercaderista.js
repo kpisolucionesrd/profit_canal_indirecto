@@ -255,4 +255,4 @@ const iniciar_seccion_styles=StyleSheet.create({
     borderWidth:3,
     marginTop:5,
   },
-})
+});
