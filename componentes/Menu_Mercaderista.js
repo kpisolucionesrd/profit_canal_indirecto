@@ -88,8 +88,8 @@ export default class MenuMercaderista extends Component{
 
       //Ir a la encuesta
       this.props.navigation.navigate('Estadisticas',{
-        colmadosEstadisticas:colmadosEstadisticas,
-        colmadosFormPrecios:colmadosFormPrecios,
+        colmadosEstadisticas:colmadosEstadisticas.length,
+        colmadosFormPrecios:colmadosFormPrecios.length,
         cantPendingEncuesta:cantPendingEncuesta,
         cantPendingFormPrecios:cantPendingFormPrecios
       });
