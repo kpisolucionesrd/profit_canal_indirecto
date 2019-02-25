@@ -76,7 +76,7 @@ export default class MenuMercaderista extends Component{
       }
       else
       {
-        cantPendingEncuesta==GlobalEncuesta.length
+        cantPendingEncuesta=GlobalEncuesta.length
       }
 
       if(GlobalEncuestaForm==null)
