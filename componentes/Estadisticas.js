@@ -11,10 +11,6 @@ export default class Estadisticas extends Component{
   };
 
   //Eventos
-  actualizarDatos=async()=>{
-    /*Esta funcion se utiliza para actuzaliar el valor de Cant. Pendientes por subir al servidor*/
-
-  }
 
   //Cadenas de Eventos
   render(){
