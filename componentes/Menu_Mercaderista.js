@@ -180,12 +180,14 @@ export default class MenuMercaderista extends Component{
       {
         let vecVerdadEncuesta=await GlobalEncuesta.map(this.funcionCargarEncuesta);
         await this.setState({estadoBoton:true}); /*Deshabilidat los botones*/
+        await AsyncStorage.removeItem("GlobalEncuesta");
       }
 
       if(GlobalEncuestaForm!=null)
       {
         let vectorVerdadForm=await  GlobalEncuestaForm.map(this.funcionCargarEncuesta);
         await this.setState({estadoBoton:true}); /*Deshabilidat los botones*/
+        await AsyncStorage.removeItem("GlobalEncuestaForm");
       }
 
       if(GlobalEncuesta==null && GlobalEncuestaForm==null)
@@ -195,6 +197,7 @@ export default class MenuMercaderista extends Component{
       else
       {
         alert("Data Cargada al Servidor Correctamente")
+
         await this.setState({estadoBoton:false}); /*Deshabilidat los botones*/
 
       }
@@ -208,21 +211,16 @@ export default class MenuMercaderista extends Component{
     try {
       if(GlobalFotos!=null)
       {
-        GlobalFotos.forEach(async(objectFotos)=>{
+        await GlobalFotos.forEach(async(objectFotos)=>{
           let nombreColmado=await Object.keys(objectFotos);
           objectFotos[nombreColmado].forEach(x=>this.funcionCargarIMG(nombreColmado,x));
         });
+        await AsyncStorage.removeItem("GlobalFotos");
       }
     } catch (e) {
       alert("Error al cargar las imagenes..."+e)
     }
 
-  };
-
-  //PRUEBA_MOSTRAR
-  mostrarData=async()=>{
-    GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")); //Vector global que guarda todas las fotos por colmado
-    alert(GlobalFotos)
   };
 
   //Cadenas de Eventos
@@ -234,12 +232,10 @@ export default class MenuMercaderista extends Component{
         <Text style={{color:'white',fontSize:30,fontWeight:'bold',textAlign:'center',marginBottom:110}}>Hola! Sr. {datosUsuario.nombre}</Text>
         <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Iniciar Encuesta'onPress={this.iniciarEncuesta} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Formulario Precios'onPress={this.encuestaPrecios.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Reiniciar Aplicacion'onPress={this.reiniciarAplicacion.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Cargar Data Al Servidor'onPress={this.cargarDataServidor.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Estadisticas'onPress={this.estadisticas} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='PRUEBA_MOSTRAR DATOS'onPress={this.mostrarData} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
 
-        <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Feb-01</Text>
+        <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Feb-26</Text>
       </ScrollView>
     )
   } //Cierre del metodo render
