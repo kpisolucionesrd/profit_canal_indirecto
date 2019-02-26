@@ -47,14 +47,6 @@ export default class MenuMercaderista extends Component{
     })
   };
 
-  reiniciarAplicacion(){
-    const { navigation } = this.props;
-    const datosUsuario=navigation.getParam('datosUsuario','some default value');
-    this.props.navigation.navigate('FaltantesMercaderista',{
-      datosUsuario:datosUsuario
-    })
-  };
-
   estadisticas=async()=>{
     /*Esta función se utiliza para ir al menu de estadistica*/
     const { navigation } = this.props;
