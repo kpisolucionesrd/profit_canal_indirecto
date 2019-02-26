@@ -89,7 +89,7 @@ export default class MenuMercaderista extends Component{
       }
 
       //Consulta al servidor
-      respuesta=await fetch("http://167.99.167.145/api/profit_usuarios/"+datosUsuarios.identificador);
+      respuesta=await fetch("http://167.99.167.145/api/profit_estadisticas/"+datosUsuarios.identificador);
       respuestaJSON=await respuesta.json();
 
       //Ir a la encuesta
