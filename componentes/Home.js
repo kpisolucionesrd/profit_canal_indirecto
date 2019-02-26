@@ -10,7 +10,8 @@ export default class Home extends Component{
       momentoAhora:new Date()
     }
     this.VerificacionLoggin() //Verificar si el usuario ha realizado loggin
-}
+};
+
   static navigationOptions = {
     title: 'Inicio',
   };
@@ -67,7 +68,6 @@ export default class Home extends Component{
 
   VerificacionLoggin=async()=>{
     //Este metodo verificara si la session fue terminada o aun sigue vigente.
-    await AsyncStorage.clear() //Limpiar el Async Storage ********************TEMPORAL*********************
     let momentoLoggin =await AsyncStorage.getItem("momentoLoggin");
     let datosUsuario= JSON.parse(await AsyncStorage.getItem("datosUsuario"));
     if(momentoLoggin!=this.state.momentoAhora.getFullYear()+"-"+this.state.momentoAhora.getMonth()+"-"+this.state.momentoAhora.getDay())
