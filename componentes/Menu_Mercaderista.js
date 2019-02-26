@@ -98,8 +98,8 @@ export default class MenuMercaderista extends Component{
         colmadosFormPrecios:colmPendientesFormPrecios.length-1,
         cantPendingEncuesta:cantPendingEncuesta,
         cantPendingFormPrecios:cantPendingFormPrecios,
-        cantEncuestaServidor:respuestaJSON[0]["EncuestaColmado"],
-        cantFormPrecio:respuestaJSON[0]["FormularioPrecios"],
+        cantEncuestaServidor:respuestaJSON["EncuestaColmado"],
+        cantFormPrecio:respuestaJSON["FormularioPrecios"],
       });
     }
     catch (e)
