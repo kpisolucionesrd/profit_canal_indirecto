@@ -7,6 +7,7 @@ import TextBoxInputCustomNumber from './ElementosCompactos/TextBoxCustom_number.
 import {Icon,Button} from 'react-native-elements';
 
 export default class EncuestaPrecios extends Component{
+
   constructor(props){
     super(props);
     this.state={

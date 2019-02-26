@@ -6,6 +6,7 @@ import MenuCamara from './componentes/MenuCamara.js';
 import CamaraTaker from './componentes/CamaraTaker.js';
 import EncuestaPrecios from './componentes/EncuestaFormPrecios.js';
 import Estadisticas from './componentes/Estadisticas.js';
+import EnviarDatos from './componentes/EnviarDatosServidor.js';
 
 
 const App = createStackNavigator(
