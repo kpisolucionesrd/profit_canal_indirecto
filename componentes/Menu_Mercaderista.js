@@ -6,6 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class MenuMercaderista extends Component{
   constructor(props){
     super(props);
+    this.state={
+      estadoBoton:false
+    }
   };
 
   static navigationOptions = {
@@ -161,6 +164,9 @@ export default class MenuMercaderista extends Component{
     /*
       Esta Funcion se utiliza para Cargar la al servidor.
     */
+    await this.setState({
+      estadoBoton:true
+    }); /*Deshabilidat los botones*/
     //--------------------------------------------------------------------------------------------
                                 /*DATOS ENCUESTA COLMADO*/
     GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")) //Vector global que guarda todas las fotos por colmado
@@ -190,6 +196,7 @@ export default class MenuMercaderista extends Component{
       else
       {
         alert("Data Cargada al Servidor Correctamente")
+        this.estadisticas() //Ir a las estadisticas
       }
     }
     catch (e)
@@ -218,7 +225,6 @@ export default class MenuMercaderista extends Component{
     alert(GlobalFotos)
   };
 
-
   //Cadenas de Eventos
   render(){
     const { navigation } = this.props;
@@ -226,12 +232,12 @@ export default class MenuMercaderista extends Component{
     return(
       <ScrollView style={iniciar_seccion_styles.main}>
         <Text style={{color:'white',fontSize:30,fontWeight:'bold',textAlign:'center',marginBottom:110}}>Hola! Sr. {datosUsuario.nombre}</Text>
-        <Button icon={{name:'list',type:'entypo'}} title='Iniciar Encuesta'onPress={this.iniciarEncuesta} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button icon={{name:'list',type:'entypo'}} title='Formulario Precios'onPress={this.encuestaPrecios.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button icon={{name:'list',type:'entypo'}} title='Reiniciar Aplicacion'onPress={this.reiniciarAplicacion.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button icon={{name:'list',type:'entypo'}} title='Cargar Data Al Servidor'onPress={this.cargarDataServidor.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button icon={{name:'list',type:'entypo'}} title='Estadisticas'onPress={this.estadisticas} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
-        <Button icon={{name:'list',type:'entypo'}} title='PRUEBA_MOSTRAR DATOS'onPress={this.mostrarData} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
+        <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Iniciar Encuesta'onPress={this.iniciarEncuesta} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
+        <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Formulario Precios'onPress={this.encuestaPrecios.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
+        <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Reiniciar Aplicacion'onPress={this.reiniciarAplicacion.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
+        <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Cargar Data Al Servidor'onPress={this.cargarDataServidor.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
+        <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Estadisticas'onPress={this.estadisticas} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
+        <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='PRUEBA_MOSTRAR DATOS'onPress={this.mostrarData} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
 
         <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Feb-01</Text>
       </ScrollView>
