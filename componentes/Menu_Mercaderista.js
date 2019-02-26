@@ -66,10 +66,10 @@ export default class MenuMercaderista extends Component{
       //Colmados Formulario Precios: Cantidad de colmados pendientes Formulario de precios
       colmPendientesFormPrecios=JSON.parse(await AsyncStorage.getItem("datosAgenda"))["colmadosFormPrecios"]
 
-      //Pendientes enviar servicor Encuesta Colmados
+      //Pendientes enviar servidor Encuesta Colmados
       GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")); //Vector global que guarda todas las encuesta
 
-      //Pendientes enviar servicor Formularios de Precios
+      //Pendientes enviar servidor Formularios de Precios
       GlobalEncuestaForm=await JSON.parse(await AsyncStorage.getItem("GlobalEncuestaForm")); //Vector global que guarda todas las encuesta
 
       //Evaluaciones

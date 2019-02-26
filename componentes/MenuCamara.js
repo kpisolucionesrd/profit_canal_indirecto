@@ -45,7 +45,7 @@ export default class MenuCamara extends Component{
         if(GlobalEncuesta!=null && GlobalEncuesta!="null" && GlobalEncuesta!=undefined && GlobalEncuesta!="undefined")
         {
           GlobalEncuesta.push(datosEncuesta) //Agregar objeto fotos
-          await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(GlobalFotos))
+          await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(GlobalEncuesta))
         }
         else
         {

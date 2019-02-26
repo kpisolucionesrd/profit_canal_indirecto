@@ -76,12 +76,12 @@ export default class EncuestaPrecios extends Component{
         if(GlobalEncuestaForm!=null && GlobalEncuestaForm!="null" && GlobalEncuestaForm!=undefined && GlobalEncuestaForm!="undefined")
         {
           GlobalEncuestaForm.push(objetoDatos) //Agregar objeto fotos
-          await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(GlobalFotos))
+          await AsyncStorage.setItem("GlobalEncuestaForm",await JSON.stringify(GlobalEncuestaForm))
         }
         else
         {
           let vectorTemp=[objetoDatos] //Agregar objeto fotos
-          await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(vectorTemp));
+          await AsyncStorage.setItem("GlobalEncuestaForm",await JSON.stringify(vectorTemp));
         }
         //--------------------------------------------------------------------------------------------------
         //Ir al Menu Mercaderista
