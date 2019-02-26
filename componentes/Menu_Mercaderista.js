@@ -164,9 +164,6 @@ export default class MenuMercaderista extends Component{
     /*
       Esta Funcion se utiliza para Cargar la al servidor.
     */
-    await this.setState({
-      estadoBoton:true
-    }); /*Deshabilidat los botones*/
     //--------------------------------------------------------------------------------------------
                                 /*DATOS ENCUESTA COLMADO*/
     GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")) //Vector global que guarda todas las fotos por colmado
@@ -182,11 +179,13 @@ export default class MenuMercaderista extends Component{
       if(GlobalEncuesta!=null)
       {
         let vecVerdadEncuesta=await GlobalEncuesta.map(this.funcionCargarEncuesta);
+        await this.setState({estadoBoton:true}); /*Deshabilidat los botones*/
       }
 
       if(GlobalEncuestaForm!=null)
       {
         let vectorVerdadForm=await  GlobalEncuestaForm.map(this.funcionCargarEncuesta);
+        await this.setState({estadoBoton:true}); /*Deshabilidat los botones*/
       }
 
       if(GlobalEncuesta==null && GlobalEncuestaForm==null)
@@ -196,7 +195,8 @@ export default class MenuMercaderista extends Component{
       else
       {
         alert("Data Cargada al Servidor Correctamente")
-        this.estadisticas() //Ir a las estadisticas
+        await this.setState({estadoBoton:false}); /*Deshabilidat los botones*/
+
       }
     }
     catch (e)
