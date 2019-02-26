@@ -22,7 +22,6 @@ export default class EnviarDatos extends Component{
       El objeto encuesta: es el json que contiene la encuesta levantada por el mercaderista.
     */
     try {
-      alert(objetoEncuesta)
       await fetch("http://167.99.167.145/api/profit_datos",{
         method:'POST',
         headers:{
