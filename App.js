@@ -17,7 +17,8 @@ const App = createStackNavigator(
     MenuCamara:MenuCamara,
     CamaraTaker:CamaraTaker,
     EncuestaPrecios:EncuestaPrecios,
-    Estadisticas:Estadisticas
+    Estadisticas:Estadisticas,
+    EnviarDatos:EnviarDatos
   },
   {
     initialRouteName:"Home"
