@@ -75,7 +75,7 @@ export default class Encuesta extends Component{
       });
 
     }else{
-      if(objetoDatos.encuesta["colmado"]=="***SELECCIONAR***" || objetoDatos.encuesta["colmado"]==null){
+      if(objetoDatos.encuesta["colmado"].toLowerCase()=="***seleccionar***" || objetoDatos.encuesta["colmado"]==null){
         alert("Favor seleccionar colmado")
       }else{
         alert("Faltan campos por completar")

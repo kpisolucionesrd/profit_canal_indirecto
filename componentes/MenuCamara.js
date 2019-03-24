@@ -23,7 +23,7 @@ export default class MenuCamara extends Component{
 
     try {
       //Guardar las imagenes y encuesta en el TERMINAL (SMARTPHONE)
-      if(fotosObjeto[datosEncuesta.encuesta["colmado"]+"__"+datosEncuesta.id].length>2){
+      if(fotosObjeto[datosEncuesta.encuesta["colmado"]+"__"+datosEncuesta.id].length>1){
         this.setState({disableButton:true});
         GlobalFotos=await JSON.parse(await AsyncStorage.getItem("GlobalFotos")); //Vector global que guarda todas las fotos por colmado
         GlobalEncuesta=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")); //Vector global que guarda todas las encuesta
@@ -59,7 +59,7 @@ export default class MenuCamara extends Component{
       }
       else
       {
-        alert("La cantidad de fotos debe ser mayor a 2");
+        alert("La cantidad de fotos debe ser mayor a 1");
       }
   }catch(e)
   {

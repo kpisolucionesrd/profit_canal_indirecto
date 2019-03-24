@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,Alert,AsyncStorage} from 'react-native';
 import {Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+var RNFS = require('react-native-fs');
 
 export default class EnviarDatos extends Component{
   constructor(props){
@@ -61,11 +61,17 @@ export default class EnviarDatos extends Component{
     catch (e) {
       alert(e)
     }
+    try{
+      RNFS.unlink(objetoImg);
+    }catch(err){
+      console.log(err);
+      alert("Error al eliminar la foto...Hablar con programador");
+    }
   };
 
   cargarDataServidor=async()=>{
     /*
-      Esta Funcion se utiliza para Cargar la al servidor.
+      Esta Funcion se utiliza para Cargar la data al servidor.
     */
     //--------------------------------------------------------------------------------------------
     const { navigation } = this.props;
@@ -124,7 +130,7 @@ export default class EnviarDatos extends Component{
         await AsyncStorage.removeItem("GlobalFotos");
       }
     } catch (e) {
-      alert("Error al cargar las imagenes..."+e)
+      alert("Error al cargar las imagenes..."+e);
     }
 
   };

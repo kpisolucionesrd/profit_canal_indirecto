@@ -123,7 +123,7 @@ export default class MenuMercaderista extends Component{
         <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Cargar Data Al Servidor'onPress={this.irCargarDataServidor.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Estadisticas'onPress={this.estadisticas} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
 
-        <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Feb-26</Text>
+        <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Marzo-23</Text>
       </ScrollView>
     )
   } //Cierre del metodo render

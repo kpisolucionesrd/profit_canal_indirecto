@@ -72,13 +72,16 @@ export default class Home extends Component{
     let datosUsuario= JSON.parse(await AsyncStorage.getItem("datosUsuario"));
     if(momentoLoggin!=this.state.momentoAhora.getFullYear()+"-"+this.state.momentoAhora.getMonth()+"-"+this.state.momentoAhora.getDay())
     {
+      /* Significa que son días diferentes, por lo tanto es un nuevo loggin */
       await AsyncStorage.clear() //Limpiar el Async Storage
       await AsyncStorage.setItem("momentoLoggin",this.state.momentoAhora.getFullYear()+"-"+this.state.momentoAhora.getMonth()+"-"+this.state.momentoAhora.getDay())
     }else
     {
-      this.props.navigation.navigate("MenuMercaderista",{
-        datosUsuario:datosUsuario
-      });
+      if(datosUsuario!=null){
+        this.props.navigation.navigate("MenuMercaderista",{
+          datosUsuario:datosUsuario
+        });
+      }
     }
   };
 
