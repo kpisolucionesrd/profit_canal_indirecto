@@ -3,6 +3,8 @@ import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,
 import {Icon} from 'react-native-elements';
 import Logo from '../imagenes/logo_profit.png';
 
+const URL="http://167.71.9.11:5000/api/";
+
 export default class Home extends Component{
   constructor(props){
     super(props);
@@ -34,14 +36,32 @@ export default class Home extends Component{
     //Esta funcion realizara un request al servidor en busqueda de las credenciales de usuario
 
     //Reiniciar el equipo
-    if(this.state.usuarioDigitado=="MarioProfit" && this.state.passwordDigitado=="AdminProfit")
+    if(this.state.passwordDigitado=="reiniciar")
     {
-      await AsyncStorage.clear() //Limpiar el Async Storage
-      alert("El Dispositivo fue reiniciado completamente")
+      let respuestaUsuarios=await fetch(URL+"profit_usuarios/"+this.state.usuarioDigitado);
+      respuestaUsuarios=await respuestaUsuarios.json();
+        await AsyncStorage.clear() //Limpiar el Async Storage
+
+        //Grabar registro de reinicio en la base de datos
+        try {
+        registroReinicioRequest=await fetch(URL+"registroreinicios",{
+          method:'POST',
+          headers:{
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body:JSON.stringify({
+            "password":respuestaUsuarios[0].password
+          })
+        });
+        } catch (error) {
+          alert("Error al Reiniciar el Smartphone");
+        }
+        alert("El Dispositivo fue reiniciado completamente");
     }else
     {
       //Proceso para hacer login con el servidor
-      response=await fetch("http://167.99.167.145/api/profit_usuarios/"+this.state.usuarioDigitado);
+      response=await fetch(URL+"profit_usuarios/"+this.state.usuarioDigitado);
       responseJSON=await response.json();
         if(responseJSON[0].password==this.state.passwordDigitado){
 
@@ -51,8 +71,8 @@ export default class Home extends Component{
           //Guardando los datos del mercaderista
           await AsyncStorage.setItem("datosUsuario",await JSON.stringify(responseJSON[0]));
 
-          //Guardando los colmados del mercaderista
-          angendaRequest=await fetch("http://167.99.167.145/api/profit_agenda_trabajo/"+this.state.usuarioDigitado)
+          //Guardando los colmados que le toca al mercaderista
+          angendaRequest=await fetch(URL+"profit_agenda_trabajo/"+this.state.usuarioDigitado)
           angendaRequestJSON=await angendaRequest.json()
           AsyncStorage.setItem("datosAgenda",JSON.stringify(angendaRequestJSON[0]))
 

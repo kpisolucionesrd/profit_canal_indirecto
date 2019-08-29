@@ -3,9 +3,10 @@ import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,
 import RadioBottom from './ElementosCompactos/radioBottom.js';
 import ComboBox from './ElementosCompactos/ComboBox.js';
 import TextInputComponent from './ElementosCompactos/textInput.js';
+import TextBoxInputCustomNumber from './ElementosCompactos/TextBoxCustom_number';
 import {Icon,Button} from 'react-native-elements';
 
-
+const URL="http://167.71.9.11:5000/api/";
 export default class Encuesta extends Component{
   constructor(props){
     super(props);
@@ -51,27 +52,21 @@ export default class Encuesta extends Component{
     objetoDatos.encuesta=this.state.objetoEncuesta;
     objetoDatos.tipoEncuesta="Encuesta";
 
+    alert(await JSON.stringify(objetoDatos));
+
     //Guardar el objeto datos en el statte
     this.setState({
       objetoDatos:objetoDatos
     });
 
-
     //Verificar si los campos fueron completados
     if(Object.keys(this.state.objetoEncuesta).length>=datosUsuarios.cantCampos && objetoDatos.encuesta["colmado"]!="***SELECCIONAR***"){
-
-      //Eliminar el colmado completado de la lista y guardar el vector
-      let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
-      let colmados=datosAgenda["colmados"];
-      indiceEliminar=colmados.indexOf(this.state.colmado)
-      colmados.splice(indiceEliminar,1); //Eliminar Colmado
-      datosAgenda["colmados"]=colmados;
-      await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
 
       //Ir al MenuCamara
       this.props.navigation.navigate('MenuCamara',{
         datosUsuarios:datosUsuarios,
-        datosEncuesta:objetoDatos
+        datosEncuesta:objetoDatos,
+        colmadoOnGoing:this.state.colmado
       });
 
     }else{
@@ -135,13 +130,13 @@ export default class Encuesta extends Component{
         <Text style={iniciar_seccion_styles.secciones}>CAPACIDAD DEL COLMADO</Text>
         {datosUsuarios.capacidadColmadoSiNo.map((campo)=><RadioBottom identificacion={campo} funcion={this.crearJson}/>)}
 
-        <TextInputComponent identificacion="Cantidad de Deliverys" funcion={this.crearJson} default="***SELECCIONAR***"/>
+        <TextBoxInputCustomNumber identificacion="Cantidad de Deliverys" funcion={this.crearJson} default={0}/>
 
         {/*Tipo Ventana*/}
         <Text style={iniciar_seccion_styles.secciones}>TIPO VENTANA</Text>
         <ComboBox identificacion="Tipo Ventana" datos={datosUsuarios.tipoVentana} funcion={this.crearJson} default="***SELECCIONAR***"/>
 
-        <TextInputComponent identificacion="Cantidad Tramos Ventana" funcion={this.crearJson} default="***SELECCIONAR***"/>
+        <TextBoxInputCustomNumber identificacion="Cantidad Tramos Ventana" funcion={this.crearJson} default={0}/>
 
         {/*Iniciativas de Visibilidad*/}
         <Text style={iniciar_seccion_styles.secciones}>INICIATIVAS DE VISIBILIDAD</Text>

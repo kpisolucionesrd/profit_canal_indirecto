@@ -3,6 +3,7 @@ import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,
 import {Button} from 'react-native-elements';
 var RNFS = require('react-native-fs');
 
+const URL="http://167.71.9.11:5000/api/";
 export default class EnviarDatos extends Component{
   constructor(props){
     super(props);
@@ -16,13 +17,14 @@ export default class EnviarDatos extends Component{
   };
 
   //Eventos
-  funcionCargarEncuesta=async(objetoEncuesta)=>{
+  funcionCargarEncuestaGeneral=async(objetoEncuesta)=>{
     /*
       Esta funcion se utiliza para cargar los datos de la encuesta al servidor.
       El objeto encuesta: es el json que contiene la encuesta levantada por el mercaderista.
     */
     try {
-      await fetch("http://167.99.167.145/api/profit_datos",{
+      var Encuesta_modified=await JSON.parse(await AsyncStorage.getItem("GlobalEncuesta")) //Vector global que guarda todas las encuesta
+      let Respuestaawait=await fetch(URL+"profit_datos",{
         method:'POST',
         headers:{
           Accept: 'application/json',
@@ -34,7 +36,47 @@ export default class EnviarDatos extends Component{
           "tipoEncuesta":objetoEncuesta.tipoEncuesta
         })
       });
-      return true;
+
+      //Verificar si el dato fue ingresado correctamente
+      if(Respuestaawait.ok){
+        let position=await Encuesta_modified.indexOf(objetoEncuesta);
+        Encuesta_modified.splice(position,1) //Eliminar objeto
+        await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(Encuesta_modified)) //Guardar el modificado
+      }
+    }
+    catch (e)
+    {
+      alert("Error ha ocurrido"+e)
+    };
+
+  };
+
+  funcionCargarEncuestaForm=async(objetoEncuesta)=>{
+    /*
+      Esta funcion se utiliza para cargar los datos de la encuesta al servidor.
+      El objeto encuesta: es el json que contiene la encuesta levantada por el mercaderista.
+    */
+    try {
+      var Encuesta_modified=await JSON.parse(await AsyncStorage.getItem("GlobalEncuestaForm")) //Vector global que guarda todas las encuesta
+      let Respuestaawait=await fetch(URL+"profit_datos",{
+        method:'POST',
+        headers:{
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body:JSON.stringify({
+          "id":objetoEncuesta.id,
+          "encuesta":objetoEncuesta.encuesta,
+          "tipoEncuesta":objetoEncuesta.tipoEncuesta
+        })
+      });
+
+      //Verificar si el dato fue ingresado correctamente
+      if(Respuestaawait.ok){
+        let position=await Encuesta_modified.indexOf(objetoEncuesta);
+        Encuesta_modified.splice(position,1) //Eliminar objeto
+        await AsyncStorage.setItem("GlobalEncuestaForm",await JSON.stringify(Encuesta_modified)) //Guardar el modificado
+      }
     }
     catch (e)
     {
@@ -52,11 +94,19 @@ export default class EnviarDatos extends Component{
       h.Accept = 'application/json';
       let formData=new FormData();
       await formData.append("foto_colmados",{uri:objetoImg,name:nombreColmado+".jpg",type:'image/jpg'})
-      await fetch("http://167.99.167.145/api/profit_insertar_imagenes",{
+      let RespuestaSendFoto=await fetch(URL+"profit_insertar_imagenes",{
         method:'POST',
         headers:h,
         body:formData
       });
+
+      if(!RespuestaSendFoto.ok){
+        let RespuestaSendFoto=await fetch(URL+"profit_insertar_imagenes",{
+          method:'POST',
+          headers:h,
+          body:formData
+        });
+      }
     }
     catch (e) {
       alert(e)
@@ -86,21 +136,25 @@ export default class EnviarDatos extends Component{
 
     /*CARGAR ENCUESTAS*/
     try {
-      if(GlobalEncuesta!=null)
-      {
-        let vecVerdadEncuesta=await GlobalEncuesta.map(this.funcionCargarEncuesta);
-        await this.setState({estadoBoton:true}); /*Deshabilidat los botones*/
-        await AsyncStorage.removeItem("GlobalEncuesta");
+      if(GlobalEncuesta!=null){
+        if(GlobalEncuesta!=null || GlobalEncuesta.length!=0)
+        {
+          await GlobalEncuesta.map(this.funcionCargarEncuestaGeneral);
+          await this.setState({estadoBoton:true}); /*Deshabilidat los botones*/
+          await AsyncStorage.removeItem("GlobalEncuesta");
+        }
       }
 
-      if(GlobalEncuestaForm!=null)
-      {
-        let vectorVerdadForm=await  GlobalEncuestaForm.map(this.funcionCargarEncuesta);
-        await this.setState({estadoBoton:true}); /*Deshabilidat los botones*/
-        await AsyncStorage.removeItem("GlobalEncuestaForm");
+      if(GlobalEncuestaForm!=null){
+        if(GlobalEncuestaForm.length!=0)
+        {
+          await  GlobalEncuestaForm.map(this.funcionCargarEncuestaForm);
+          await this.setState({estadoBoton:true}); /*Deshabilidat los botones*/
+          await AsyncStorage.removeItem("GlobalEncuestaForm");
+        }
       }
 
-      if(GlobalEncuesta==null && GlobalEncuestaForm==null)
+      if((GlobalEncuesta==null && GlobalEncuestaForm==null) || (GlobalEncuesta==0 & GlobalEncuestaForm==0))
       {
         alert("No Existe Data para cargar al servidor")
       }
@@ -116,7 +170,7 @@ export default class EnviarDatos extends Component{
     }
     catch (e)
     {
-      alert("Error al cargar la data...intente de nuevo-->"+e)
+      alert("Error al cargar la data...intente de nuevo-->"+e);
     }
     //--------------------------------------------------------------------------------------------
                                 /*CARGAR FOTOS AL SERVIDOR*/

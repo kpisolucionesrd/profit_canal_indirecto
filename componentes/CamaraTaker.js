@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,Alert,AsyncStorage,Picker} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {Icon,Button} from 'react-native-elements';
-
+const URL="http://167.71.9.11:5000/api/";
 export default class CamaraTaker extends Component{
   constructor(props){
     super(props);
@@ -29,7 +29,7 @@ export default class CamaraTaker extends Component{
     const fotosObjeto=await this.state.fotosObjeto;
 
     //Tomando imagenes
-    const options = { quality: 0.8,skipProcessing:true};
+    const options = { quality: 0.5,skipProcessing:false};
     const data = await this.camera.takePictureAsync(options);
 
     //Insertando imagen tomada
@@ -63,7 +63,7 @@ export default class CamaraTaker extends Component{
   render(){
     return(
       <ScrollView>
-        <RNCamera ref={ref => {this.camera = ref;}} style={cameraView.cameraStyle} flashMode={RNCamera.Constants.FlashMode.on} type={RNCamera.Constants.Type.back} permissionDialogTitle={'Permission to use camera'} permissionDialogMessage={'We need your permission to use your camera phone'}/>
+        <RNCamera ref={ref => {this.camera = ref;}} style={cameraView.cameraStyle} flashMode={RNCamera.Constants.FlashMode.on} type={RNCamera.Constants.Type.back} permissionDialogTitle={'Permiso para acceder a la cámara'}/>
         <Icon name='camera' type='entypo' color='red' iconStyle={{marginLeft:300}} size={40} onPress={this.capturarFoto}/>
         <Text style={{marginTop:25,color:'red',fontWeight:'bold',fontSize:20,marginBottom:40}}>Cantidad de fotos: {this.state.fotosVector.length}</Text>
         <Icon disabled={this.state.disableButton} name='done' type='materiallcons' color='white' iconStyle={{marginLeft:300,color:'red'}} size={40} onPress={this.finishCam}/>

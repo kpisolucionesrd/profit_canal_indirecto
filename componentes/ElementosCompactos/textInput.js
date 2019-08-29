@@ -10,7 +10,7 @@ export default class TextInputComponent extends Component{
     }
   }
   //Funciones
-  cambioValor=(itemValue)=>{
+  cambioValor=(itemValue,itemIndex)=>{
     this.setState({
       seleccion:itemValue,
     });

@@ -3,6 +3,8 @@ import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,
 import {Icon,Button} from 'react-native-elements';
 import Slideshow from 'react-native-slideshow';
 
+const URL="http://167.71.9.11:5000/api/";
+
 export default class MenuCamara extends Component{
   constructor(props){
     super(props);
@@ -20,6 +22,7 @@ export default class MenuCamara extends Component{
     const { navigation } = this.props;
     const datosEncuesta=navigation.getParam('datosEncuesta');
     const fotosObjeto=navigation.getParam('fotosObjeto','NA');
+    const colmadoOngoing=navigation.getParam('colmadoOnGoing','NA');
 
     try {
       //Guardar las imagenes y encuesta en el TERMINAL (SMARTPHONE)
@@ -55,6 +58,14 @@ export default class MenuCamara extends Component{
         //--------------------------------------------------------------------------------------------------
         //Ir al Menu
         this.props.navigation.navigate('MenuMercaderista');
+
+          //Eliminar el colmado completado de la lista y guardar el vector
+          let datosAgenda=await JSON.parse(await AsyncStorage.getItem("datosAgenda"));
+          let colmados=datosAgenda["colmados"];
+          indiceEliminar=colmados.indexOf(colmadoOngoing)
+          colmados.splice(indiceEliminar,1); //Eliminar Colmado
+          datosAgenda["colmados"]=colmados;
+          await AsyncStorage.setItem("datosAgenda",await JSON.stringify(datosAgenda));
         alert("La Data se guardo Exitosamente en el Dispositivo");
       }
       else
@@ -76,7 +87,7 @@ export default class MenuCamara extends Component{
     h.Accept = 'application/json';
     let formData=new FormData();
     await formData.append("foto_colmados",{uri:imagenURI,name:"FlashTeam-"+puntoVenta+".jpg",type:'image/jpg'})
-    await fetch("http://167.99.167.145/api/profit_insertar_imagenes",{
+    await fetch(URL+"profit_insertar_imagenes",{
       method:'POST',
       headers:h,
       body:formData

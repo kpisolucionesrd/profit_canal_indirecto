@@ -3,6 +3,9 @@ import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
+const URL="http://167.71.9.11:5000/api/";
+
 export default class MenuMercaderista extends Component{
   constructor(props){
     super(props);
@@ -84,7 +87,7 @@ export default class MenuMercaderista extends Component{
       }
 
       //Consulta al servidor
-      respuesta=await fetch("http://167.99.167.145/api/profit_estadisticas/"+datosUsuarios.identificador);
+      respuesta=await fetch(URL+"profit_estadisticas/"+datosUsuarios.identificador);
       respuestaJSON=await respuesta.json();
 
       //Ir a la encuesta
@@ -123,7 +126,7 @@ export default class MenuMercaderista extends Component{
         <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Cargar Data Al Servidor'onPress={this.irCargarDataServidor.bind(this)} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
         <Button disabled={this.state.estadoBoton} icon={{name:'list',type:'entypo'}} title='Estadisticas'onPress={this.estadisticas} buttonStyle={{width:'80%',marginLeft:'10%',backgroundColor:'white',borderColor:'red',marginBottom:15}} titleStyle={{color:'red',fontWeight:'bold'}}/>
 
-        <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Marzo-23</Text>
+        <Text style={{color:'white',fontSize:8,fontWeight:'bold',textAlign:'center',marginTop:50}}>Release Date: 2019-Agosto-17</Text>
       </ScrollView>
     )
   } //Cierre del metodo render

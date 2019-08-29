@@ -6,6 +6,7 @@ import TextInputComponent from './ElementosCompactos/textInput.js';
 import TextBoxInputCustomNumber from './ElementosCompactos/TextBoxCustom_number.js';
 import {Icon,Button} from 'react-native-elements';
 
+const URL="http://167.71.9.11:5000/api/";
 export default class EncuestaPrecios extends Component{
 
   constructor(props){
@@ -87,7 +88,8 @@ export default class EncuestaPrecios extends Component{
         //--------------------------------------------------------------------------------------------------
         //Ir al Menu Mercaderista
         this.props.navigation.navigate('MenuMercaderista');
-        alert("La Data se guardo Exitosamente en el Dispositivo");
+        //alert("La Data se guardo Exitosamente en el Dispositivo");
+        alert(await AsyncStorage.getItem("GlobalEncuestaForm"))
       }
       else
       {
