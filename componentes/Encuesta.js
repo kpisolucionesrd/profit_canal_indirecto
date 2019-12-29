@@ -6,7 +6,8 @@ import TextInputComponent from './ElementosCompactos/textInput.js';
 import TextBoxInputCustomNumber from './ElementosCompactos/TextBoxCustom_number';
 import {Icon,Button} from 'react-native-elements';
 
-const URL="http://167.71.9.11:5000/api/";
+//const URL="http://167.71.9.11:5000/api/";
+const URL="http://165.22.205.126:5000/api/";
 export default class Encuesta extends Component{
   constructor(props){
     super(props);
@@ -51,8 +52,6 @@ export default class Encuesta extends Component{
     objetoDatos.id=datosUsuarios.identificador;
     objetoDatos.encuesta=this.state.objetoEncuesta;
     objetoDatos.tipoEncuesta="Encuesta";
-
-    alert(await JSON.stringify(objetoDatos));
 
     //Guardar el objeto datos en el statte
     this.setState({

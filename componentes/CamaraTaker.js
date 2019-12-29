@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,Alert,AsyncStorage,Picker} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {Icon,Button} from 'react-native-elements';
-const URL="http://167.71.9.11:5000/api/";
+
+//const URL="http://167.71.9.11:5000/api/";
+const URL="http://165.22.205.126:5000/api/";
+
 export default class CamaraTaker extends Component{
   constructor(props){
     super(props);

@@ -3,7 +3,8 @@ import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,
 import {Button} from 'react-native-elements';
 var RNFS = require('react-native-fs');
 
-const URL="http://167.71.9.11:5000/api/";
+//const URL="http://167.71.9.11:5000/api/";
+const URL="http://165.22.205.126:5000/api/";
 export default class EnviarDatos extends Component{
   constructor(props){
     super(props);
@@ -36,13 +37,6 @@ export default class EnviarDatos extends Component{
           "tipoEncuesta":objetoEncuesta.tipoEncuesta
         })
       });
-
-      //Verificar si el dato fue ingresado correctamente
-      if(Respuestaawait.ok){
-        let position=await Encuesta_modified.indexOf(objetoEncuesta);
-        Encuesta_modified.splice(position,1) //Eliminar objeto
-        await AsyncStorage.setItem("GlobalEncuesta",await JSON.stringify(Encuesta_modified)) //Guardar el modificado
-      }
     }
     catch (e)
     {
@@ -70,13 +64,6 @@ export default class EnviarDatos extends Component{
           "tipoEncuesta":objetoEncuesta.tipoEncuesta
         })
       });
-
-      //Verificar si el dato fue ingresado correctamente
-      if(Respuestaawait.ok){
-        let position=await Encuesta_modified.indexOf(objetoEncuesta);
-        Encuesta_modified.splice(position,1) //Eliminar objeto
-        await AsyncStorage.setItem("GlobalEncuestaForm",await JSON.stringify(Encuesta_modified)) //Guardar el modificado
-      }
     }
     catch (e)
     {

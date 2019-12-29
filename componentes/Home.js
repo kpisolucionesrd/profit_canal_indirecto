@@ -3,7 +3,8 @@ import {Image, StyleSheet, Text, View,ScrollView,TextInput,KeyboardAvoidingView,
 import {Icon} from 'react-native-elements';
 import Logo from '../imagenes/logo_profit.png';
 
-const URL="http://167.71.9.11:5000/api/";
+//const URL="http://167.71.9.11:5000/api/";
+const URL="http://165.22.205.126:5000/api/";
 
 export default class Home extends Component{
   constructor(props){

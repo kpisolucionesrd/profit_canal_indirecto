@@ -6,7 +6,10 @@ import TextInputComponent from './ElementosCompactos/textInput.js';
 import TextBoxInputCustomNumber from './ElementosCompactos/TextBoxCustom_number.js';
 import {Icon,Button} from 'react-native-elements';
 
-const URL="http://167.71.9.11:5000/api/";
+//const URL="http://167.71.9.11:5000/api/";
+const URL="http://165.22.205.126:5000/api/";
+
+
 export default class EncuestaPrecios extends Component{
 
   constructor(props){

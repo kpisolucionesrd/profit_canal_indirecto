@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {WebView,ScrollView,Text} from 'react-native';
 
-const URL="http://167.71.9.11:5000/api/";
+//const URL="http://167.71.9.11:5000/api/";
+const URL="http://165.22.205.126:5000/api/";
 
 export default class Estadisticas extends Component{
   constructor(props){
